@@ -32,19 +32,7 @@
   "dist": {
     "basePath": "dist/components",
     "files": [
-      "app-globals-0f993ce5.js",
-      "noi-input.entry.js",
-      "noi-brennerlec.esm.js",
-      "index-2e0e7c71.js",
-      "noi-road-webcam.entry.js",
-      "noi-brennerlec-map.entry.js",
-      "index.esm.js",
-      "noi-road-webcam-list.entry.js",
-      "noi-button.entry.js",
-      "leaflet-src-06ec0c23.js",
-      "shadow-css-7ad5caf8.js",
-      "noi-icon.entry.js",
-      "noi-backdrop.entry.js"
+      "--set by build script--"
     ],
     "scripts": [
       {
@@ -62,7 +50,12 @@
         "label": "Layout appearance",
         "required": false,
         "options": {
-          "values": ["desktop", "tablet", "mobile", "auto"],
+          "values": [
+            "desktop",
+            "tablet",
+            "mobile",
+            "auto"
+          ],
           "default": "auto"
         }
       },
@@ -72,7 +65,11 @@
         "label": "Two letter key for the language to be used, if omitted the widget will use the browser language. Fallback is `en`",
         "required": false,
         "options": {
-          "values": ["en", "de", "it"],
+          "values": [
+            "en",
+            "de",
+            "it"
+          ],
           "default": "en"
         }
       },
