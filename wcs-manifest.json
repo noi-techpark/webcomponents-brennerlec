@@ -4,7 +4,7 @@
   "description": "Hello world simple webcomp example",
   "descriptionAbstract": "Hello world simple webcomp example",
   "license": "AGPL-3.0-or-later",
-  "repositoryUrl": "https://your-repository.git",
+  "repositoryUrl": "https://github.com/noi-techpark/webcomponents-brennerlec.git",
   "copyrightHolders": [
     {
       "name": "NOI",
@@ -15,32 +15,74 @@
   ],
   "authors": [
     {
-      "name": "...",
-      "email": "...",
-      "organization": "...",
-      "organizationUrl": "..."
+      "name": "NOI",
+      "email": "digital@noi.bz.it",
+      "organization": "NOI S.p.A",
+      "organizationUrl": "https://noi.bz.it"
+    },
+    {
+      "name": "Solhea",
+      "email": "info@solhea.com",
+      "organization": "Solhea S.R.L.",
+      "organizationUrl": "https://solhea.com"
     }
   ],
   "image": "wcs-logo.png",
   "searchTags": [],
   "dist": {
-    "basePath": "dist",
+    "basePath": "dist/components",
     "files": [
-      "webcomp-boilerplate.min.js"
+      "app-globals-0f993ce5.js",
+      "noi-input.entry.js",
+      "noi-brennerlec.esm.js",
+      "index-2e0e7c71.js",
+      "noi-road-webcam.entry.js",
+      "noi-brennerlec-map.entry.js",
+      "index.esm.js",
+      "noi-road-webcam-list.entry.js",
+      "noi-button.entry.js",
+      "leaflet-src-06ec0c23.js",
+      "shadow-css-7ad5caf8.js",
+      "noi-icon.entry.js",
+      "noi-backdrop.entry.js"
     ],
     "scripts": [
+      {
+        "file": "noi-road-webcam.js",
+        "parameter": "type='module'"
+      }
     ]
   },
   "configuration": {
-    "tagName": "hello-world",
+    "tagName": "noi-road-webcam",
     "options": [
       {
-        "key": "title",
-        "type": "text",
-        "label": "title of the web-comp",
+        "key": "layout",
+        "type": "select",
+        "label": "Layout appearance",
         "required": false,
         "options": {
-          "default": "hello-world"
+          "values": ["desktop", "tablet", "mobile", "auto"],
+          "default": "auto"
+        }
+      },
+      {
+        "key": "lang",
+        "type": "select",
+        "label": "Two letter key for the language to be used, if omitted the widget will use the browser language. Fallback is `en`",
+        "required": false,
+        "options": {
+          "values": ["en", "de", "it"],
+          "default": "en"
+        }
+      },
+      {
+        "key": "style",
+        "type": "text",
+        "label": "CSS style definition",
+        "required": false,
+        "options": {
+          "default": "--color-primary: #0068B4; --color-primary-rgb: 0, 104, 180; --color-secondary: #00A767; --color-marker: #3a9c77; --color-marker-bg: #FFFFFF; --color-text: #333333; --color-background: #FFFFFF"
         }
       }
     ]
