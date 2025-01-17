@@ -1,9 +1,10 @@
 {
-  "name": "webcomp-boilerplate-helloworld",
+  "name": "noi-brennerlec",
   "private": true,
   "scripts": {
     "build": "stencil build --docs --config stencil.config.ts --prod",
-    "start": "stencil build --config stencil.config.ts --dev --watch --serve"
+    "start": "stencil build --config stencil.config.ts --dev --watch --serve",
+    "lint": "reuse lint"
   },
   "dependencies": {
     "@stencil/core": "^4.23.2",

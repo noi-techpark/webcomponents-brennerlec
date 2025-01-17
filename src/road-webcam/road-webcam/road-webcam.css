@@ -1,0 +1,166 @@
+/*
+ * SPDX-FileCopyrightText: 2025 NOI Techpark <digital@noi.bz.it>
+ *
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
+
+:host {
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  align-items: stretch;
+  font-family: inherit;
+
+  background: var(--color-background--inner);
+
+
+  /**
+   * @prop --color-primary: Primary color
+   */
+  --color-primary--inner: var(--color-primary, #0068B4);
+  /**
+   * @prop --color-primary-rgb: Primary color in RGB format
+   */
+  --color-primary-rgb--inner: var(--color-primary-rgb, 0, 104, 180);
+  /**
+   * @prop --color-secondary: Secondary color
+   */
+  --color-secondary--inner: var(--color-secondary, #00A767);
+
+  /**
+   * @prop --color-marker: Map marker color
+   */
+  --color-marker--inner: var(--color-marker, #3a9c77);
+  /**
+   * @prop --color-marker: Map marker background
+   */
+  --color-marker-bg--inner: var(--color-marker-bg, #FFFFFF);
+
+  /**
+   * @prop --color-text: Text color
+   */
+  --color-text--inner: var(--color-text, #333333);
+  /**
+   * @prop --color-background: Background color
+   */
+  --color-background--inner: var(--color-background, #FFFFFF);
+
+}
+
+:host(.layout--tablet),
+:host(.layout--mobile) {
+  flex-direction: column-reverse;
+}
+
+:host(.layout--tablet) .layout__list,
+:host(.layout--mobile) .layout__list {
+  flex: 0;
+}
+
+.layout__list {
+  flex: 0 0 350px;
+}
+
+.layout__center {
+  position: relative;
+  flex: 1;
+}
+
+noi-brennerlec-map {
+  height: 100%;
+  width: 100%;
+}
+
+.popup {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  background: var(--color-background--inner);
+  display: flex;
+  flex-direction: column;
+}
+
+
+.popup__title {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--color-primary--inner);
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.popup__title-text {
+  flex: 1;
+}
+
+.popup__subtitle {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-secondary--inner);
+}
+
+.popup__image {
+  margin: 20px 0;
+  width: 100%;
+  max-width: 465px;
+  overflow: hidden;
+  object-fit: contain;
+}
+
+/* Map */
+.noi-map-line {
+  stroke: var(--color-marker--inner);
+  stroke-width: 5px;
+}
+
+.noi-marker {
+  /*position: relative; < affects icon position */
+}
+
+.noi-marker__icon {
+  display: block;
+  height: 100%;
+  width: 100%;
+  border: 2px solid var(--color-marker--inner);
+  border-radius: 50%;
+  background-color: var(--color-marker--inner);
+}
+
+.noi-marker.selected .noi-marker__icon {
+  background-color: var(--color-marker-bg--inner);
+}
+
+.noi-marker__label {
+  position: absolute;
+  top: -3px;
+
+  display: inline-block;
+  background-color: var(--color-marker-bg--inner);
+  border: 2px solid var(--color-marker--inner);
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--color-marker--inner);
+  font-weight: 700;
+  padding: 0 10px 0 10px;
+}
+
+.noi-marker--left .noi-marker__label {
+  margin-right: 16px;
+  right: 100%;
+}
+
+.noi-marker--right .noi-marker__label {
+  margin-left: 16px;
+  left: 100%;
+}
+
+.noi-marker.selected .noi-marker__label {
+  background-color: var(--color-marker--inner);
+  color: var(--color-marker-bg--inner);
+}
