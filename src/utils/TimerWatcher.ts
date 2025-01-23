@@ -5,7 +5,7 @@
 export type Listener<T> = (value: T) => any;
 export type Subscription = { unsubscribe: () => void; };
 
-export class SimpleWatcher<T> {
+export class TimerWatcher<T> {
   private listeners: Listener<T>[] = [];
   private _timer = null;
   private _hasValue = false;
@@ -34,11 +34,8 @@ export class SimpleWatcher<T> {
 
     return {
       unsubscribe: () => {
-        const idx = this.listeners.indexOf(listener);
-        if (idx >= 0) {
-          this.listeners.splice(idx, 1);
-          this._updateListeners();
-        }
+        this.listeners.splice(this.listeners.indexOf(listener), 1);
+        this._updateListeners();
       }
     };
   }

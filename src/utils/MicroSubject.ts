@@ -6,22 +6,22 @@
  * inspired by MicroEvent.js
  */
 export class MicroSubject<T> {
-  private _events: Array<(arg: T) => any> = [];
+  private readonly _listeners: Array<(arg: T) => any> = [];
 
   bind(fn: (arg: T) => any) {
-    this._events = this._events || [];
-    this._events.push(fn);
+    // this._listeners = this._listeners || [];
+    this._listeners.push(fn);
   }
 
   unbind(fn: (arg: T) => any) {
-    this._events = this._events || [];
-    this._events.splice(this._events.indexOf(fn), 1);
+    // this._listeners = this._listeners || [];
+    this._listeners.splice(this._listeners.indexOf(fn), 1);
   }
 
   trigger(data: T /* , args... */) {
-    this._events = this._events || [];
-    for (let i = 0; i < this._events.length; i++) {
-      this._events[i].apply(this, [data]);
+    // this._listeners = this._listeners || [];
+    for (let i = 0; i < this._listeners.length; i++) {
+      this._listeners[i].apply(this, [data]);
     }
   }
 }

@@ -8,7 +8,7 @@ import { DivIcon, LayerGroup, Map, Marker, Polyline } from 'leaflet';
 import { StencilComponent } from "../../utils/StencilComponent";
 import { getLayoutClass, ViewLayout } from "../../data/breakpoints";
 import { WebcamInfoShort } from "../../data/webcam/WebcamInfoShort";
-import { Subscription } from "../../utils/simple-subscription";
+import { Subscription } from "../../utils/TimerWatcher";
 import { LanguageDataService } from "../../data/language/language-data-service";
 
 @Component({
@@ -45,6 +45,7 @@ export class RoadWebcamComponent implements StencilComponent {
 
   @Element() el: HTMLElement;
 
+  // note: services are overridden in tests
   webcamDataService: WebcamDataService;
   languageService: LanguageDataService;
 

@@ -5,7 +5,7 @@
 import { ListResponse } from "../ListResponse";
 import { WebcamInfo } from "./WebcamInfo";
 import { WebcamInfoShort } from "./WebcamInfoShort";
-import { SimpleWatcher } from "../../utils/simple-subscription";
+import { TimerWatcher } from "../../utils/TimerWatcher";
 import { translateProperty } from "../language/translateProperty";
 
 const RELOAD_INTERVAL = 1 * 60 * 1000;
@@ -29,7 +29,7 @@ export class WebcamDataService {
   }
 
   cameraListWatcher(lang: string, interval = RELOAD_INTERVAL) {
-    return new SimpleWatcher(() => {
+    return new TimerWatcher(() => {
       return this.getCameraList(lang);
     }, interval);
   }
