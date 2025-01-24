@@ -21,7 +21,7 @@ export class LanguageDataService {
    */
   constructor() {
     this.browserLanguage = this.detectBrowserLanguage() || DEFAULT_LANGUAGE;
-    this.useLanguage(this.browserLanguage);
+    // this.useLanguage(this.browserLanguage);
   }
 
   static getInstance() {

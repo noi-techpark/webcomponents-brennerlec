@@ -14,7 +14,7 @@ import { LanguageDataService } from "../../data/language/language-data-service";
 })
 export class RoadWebcamListComponent {
 
-  @Prop()
+  @Prop({mutable: true})
   webcamArr: WebcamInfoShort[] | null = null;
 
   @Prop({mutable: true})
@@ -37,9 +37,13 @@ export class RoadWebcamListComponent {
   languageService: LanguageDataService;
 
   constructor() {
-    this.languageService = LanguageDataService.getInstance();
     this._renderItem = this._renderItem.bind(this);
     this._onLanguageChanged = this._onLanguageChanged.bind(this);
+    this.init();
+  }
+
+  init() {
+    this.languageService = LanguageDataService.getInstance();
   }
 
   connectedCallback() {
