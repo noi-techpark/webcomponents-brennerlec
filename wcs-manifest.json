@@ -32,7 +32,17 @@
   "dist": {
     "basePath": "dist/components",
     "files": [
-      "--set by build script--"
+      "noi-road-webcam.js",
+      "p-22c8c943.js",
+      "p-24479f0a.js",
+      "p-2782aebd.js",
+      "p-2d986669.js",
+      "p-5a057fb2.js",
+      "p-6062498b.js",
+      "p-a25d2740.js",
+      "assets/data/a22-1km.json",
+      "assets/i18n/en.json",
+      "assets/i18n/it.json"
     ],
     "scripts": [
       {
