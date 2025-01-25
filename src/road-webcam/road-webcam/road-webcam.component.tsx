@@ -210,15 +210,16 @@ export class RoadWebcamComponent implements StencilComponent {
     return (
       <Host class={this.layoutClass}>
         <noi-road-webcam-list class="layout__list"
+                              part="list"
                               layoutClass={this.layoutClass}
                               idSelected={this.selectedCameraInfo?.id}
                               webcamArr={this.webcamArr}
                               onItemClick={e => this.itemClick(e)}></noi-road-webcam-list>
         <div class="layout__center">
-          <noi-brennerlec-map></noi-brennerlec-map>
+          <noi-brennerlec-map part="map"></noi-brennerlec-map>
           <noi-backdrop hidden={ !this.selectedCameraInfo} onBackdropClick={() => this.onBackdropClick()}>
             {this.selectedCameraInfo ?
-              <div class="popup">
+              <div class="popup" part="popup">
                 <div class="popup__title">
                   <span class="popup__title-text">{this.selectedCameraInfo.title}</span>
                   <noi-button class="popup__close-btn" iconOnly={true} onBtnClick={() => this._selectCamera(null)}>
