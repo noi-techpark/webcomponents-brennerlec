@@ -226,7 +226,7 @@ export class RoadWebcamComponent implements StencilComponent {
                     <noi-icon name="close"></noi-icon>
                   </noi-button>
                 </div>
-                {/*<div class="popup__subtitle">Brennero/Brenner (BZ) km 1</div>*/}
+                <div class="popup__subtitle">{this.selectedCameraInfo.description}</div>
                 {/*<div class="popup__image" style={{backgroundImage: 'url("' + this.selectedCameraInfo.Webcamurl + '")'}}></div>*/}
                 <img class="popup__image"
                      src={this.selectedCameraInfo.image.imageUrl}
