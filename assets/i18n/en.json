@@ -1,4 +1,5 @@
 {
-  "app.search.placeholder": "Search",
-  "app.webcamera.list": "Survey stations"
+  "app.list.search.placeholder": "Search",
+  "app.list.title": "Survey stations",
+  "app.list.empty": "No data"
 }

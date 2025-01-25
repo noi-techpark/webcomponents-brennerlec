@@ -85,14 +85,14 @@ export class RoadWebcamListComponent {
       <div class="title-wrapper">
         <div class="title ellipsis">
           <noi-icon class="title__icon" name="stations"></noi-icon>
-          <span class="title__text">{this.languageService.translate('app.webcamera.list')}</span>
+          <span class="title__text">{this.languageService.translate('app.list.title')}</span>
         </div>
-        <noi-input placeholder={this.languageService.translate('app.search.placeholder')}
+        <noi-input placeholder={this.languageService.translate('app.list.search.placeholder')}
                    onValueChange={v => this.filterData(v.detail)}></noi-input>
       </div>
       <div class="list">
         {this.webcamArrFiltered.map(this._renderItem)}
-        {this.webcamArrFiltered.length ? '' : <div class="no-data">No data</div>}
+        {this.webcamArrFiltered.length ? '' : <div class="no-data">{this.languageService.translate('app.list.empty')}</div>}
       </div>
     </Host>
   }

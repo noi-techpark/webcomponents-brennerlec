@@ -25,12 +25,12 @@ describe('noi-road-webcam-list', () => {
           <div class="title-wrapper">
             <div class="title ellipsis">
               <noi-icon class="title__icon" name="stations"></noi-icon>
-              <span class="title__text">app.webcamera.list</span>
+              <span class="title__text">app.list.title</span>
             </div>
-            <noi-input placeholder="app.search.placeholder"></noi-input>
+            <noi-input placeholder="app.list.search.placeholder"></noi-input>
           </div>
           <div class="list">
-              <div class="no-data">No data</div>
+              <div class="no-data">app.list.empty</div>
           </div>
         </noi-road-webcam-list>
       `);

@@ -1,4 +1,5 @@
 {
-  "app.search.placeholder": "Cerca",
-  "app.webcamera.list": "Stazioni di rilevamento"
+  "app.list.search.placeholder": "Cerca",
+  "app.list.title": "Stazioni di rilevamento",
+  "app.list.empty": "Nessun dato"
 }
