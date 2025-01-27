@@ -107,7 +107,7 @@ export class RoadWebcamComponent implements StencilComponent {
     // center on line
     const bounds = roadLine.getBounds();
     this.map.setView(bounds.getCenter());
-    this.map.setZoom(8); // TODO: zoom to fil the line
+    this.map.setZoom(8); // TODO: zoom to fill the line
 
 
     //

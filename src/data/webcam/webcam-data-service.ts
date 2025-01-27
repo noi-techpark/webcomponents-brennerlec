@@ -10,17 +10,20 @@ import { translateProperty } from "../language/translateProperty";
 
 const RELOAD_INTERVAL = 1 * 60 * 1000;
 
+const ORIGIN = 'webcomp-brennerlec';
+
 export class WebcamDataService {
 
   // getCameraList(opts?:{pagesize?:number}) {
   getCameraList(lang: string) {
+    const roadName = 'a22';
     const requestDate = new Date();
-    return fetch('https://api.tourism.testingmachine.eu/v1/WebcamInfo?source=a22&pagesize=-1')
+    return fetch(`https://api.tourism.testingmachine.eu/v1/WebcamInfo?origin=${ORIGIN}&source=${roadName}&pagesize=-1`)
       .then(r => r.json() as Promise<ListResponse<WebcamInfo>>)
       .then(r => r.Items)
       .then(r => {
         return r
-          .map(wc => _convertToShortInfo(wc, 'a22', requestDate, lang))
+          .map(wc => _convertToShortInfo(wc, roadName, requestDate, lang))
           .filter(v => !!v);
       })
       .then(r => {
@@ -61,6 +64,7 @@ function _convertToShortInfo(info: WebcamInfo, roadName: string, requestDate: Da
 
   // add dynamic value to image url to skip caching issue
   const u = new URL(image.ImageUrl);
+  u.searchParams.append('origin', ORIGIN);
   u.searchParams.append('_', requestDate.getTime() + '');
   const urlNoCache = u.toString();
 
