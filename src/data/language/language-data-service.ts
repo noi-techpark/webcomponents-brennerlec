@@ -21,7 +21,6 @@ export class LanguageDataService {
    */
   constructor() {
     this.browserLanguage = this.detectBrowserLanguage() || DEFAULT_LANGUAGE;
-    // this.useLanguage(this.browserLanguage);
   }
 
   static getInstance() {
@@ -56,13 +55,16 @@ export class LanguageDataService {
     this._languageLoading$[langNormalized] = this._fetchLanguageData(langNormalized)
       .then(() => {
         this.currentLanguage = langNormalized;
+        this.onLanguageChange.trigger(this.currentLanguage);
       })
       .catch(e => {
         console.warn(e);
-        this.currentLanguage = DEFAULT_LANGUAGE;
+        if (this.currentLanguage !== DEFAULT_LANGUAGE) {
+          this.currentLanguage = DEFAULT_LANGUAGE;
+          this.onLanguageChange.trigger(this.currentLanguage);
+        }
       })
       .finally(() => {
-        this.onLanguageChange.trigger(this.currentLanguage);
         delete this._languageLoading$[langNormalized];
       });
 

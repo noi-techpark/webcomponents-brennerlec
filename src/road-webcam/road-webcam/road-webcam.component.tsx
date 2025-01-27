@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import { Component, Element, forceUpdate, h, Host, Listen, Prop, State, Watch } from "@stencil/core";
+import { Component, Element, forceUpdate, h, Host, Prop, State, Watch } from "@stencil/core";
 import { WebcamDataService } from "../../data/webcam/webcam-data-service";
 import { DivIcon, LayerGroup, Map, Marker, Polyline } from 'leaflet';
 import { StencilComponent } from "../../utils/StencilComponent";
@@ -53,6 +53,7 @@ export class RoadWebcamComponent implements StencilComponent {
     this.onBackdropClick = this.onBackdropClick.bind(this);
     this.itemClick = this.itemClick.bind(this);
     this._onLanguageChanged = this._onLanguageChanged.bind(this);
+    this.mapReady = this.mapReady.bind(this);
     this.init();
   }
 
@@ -89,7 +90,6 @@ export class RoadWebcamComponent implements StencilComponent {
     return this.languageService.useLanguage(this.language);
   }
 
-  @Listen('mapReady')
   async mapReady(event: CustomEvent<Map>) {
     this.map = event.detail;
 
@@ -216,7 +216,7 @@ export class RoadWebcamComponent implements StencilComponent {
                               webcamArr={this.webcamArr}
                               onItemClick={e => this.itemClick(e)}></noi-road-webcam-list>
         <div class="layout__center">
-          <noi-brennerlec-map part="map"></noi-brennerlec-map>
+          <noi-brennerlec-map part="map" onMapReady={e => this.mapReady(e)}></noi-brennerlec-map>
           <noi-backdrop hidden={ !this.selectedCameraInfo} onBackdropClick={() => this.onBackdropClick()}>
             {this.selectedCameraInfo ?
               <div class="popup" part="popup">

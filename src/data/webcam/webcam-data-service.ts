@@ -10,6 +10,7 @@ import { translateProperty } from "../language/translateProperty";
 
 const RELOAD_INTERVAL = 1 * 60 * 1000;
 
+// origin is used to track usage and traffic patterns
 const ORIGIN = 'webcomp-brennerlec';
 
 export class WebcamDataService {
