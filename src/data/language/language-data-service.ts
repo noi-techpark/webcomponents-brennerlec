@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 import { MicroSubject } from "../../utils/MicroSubject";
+import { getAssetPath } from "../../utils/asset-path";
 
 const DEFAULT_LANGUAGE = "en";
 
@@ -78,7 +79,9 @@ export class LanguageDataService {
 
   _fetchLanguageData(lang: string) {
     if ( !this.languageData[lang]) {
-      return fetch('assets/i18n/' + lang + '.json')
+      const dataPath = getAssetPath('i18n_' + lang + '.json');
+      // console.log('[LanguageDataService] dataPath', dataPath);
+      return fetch(dataPath)
         .then(r => r.json())
         .then(data => {
           this.languageData[lang] = data;

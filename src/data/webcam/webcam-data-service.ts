@@ -7,6 +7,7 @@ import { WebcamInfo } from "./WebcamInfo";
 import { WebcamInfoShort } from "./WebcamInfoShort";
 import { TimerWatcher } from "../../utils/TimerWatcher";
 import { translateProperty } from "../language/translateProperty";
+import { getAssetPath } from "../../utils/asset-path";
 
 const RELOAD_INTERVAL = 1 * 60 * 1000;
 
@@ -39,7 +40,9 @@ export class WebcamDataService {
   }
 
   getRoutePath() {
-    return fetch('assets/data/a22-1km.json')
+    const dataPath = getAssetPath('data_a22-1km.json');
+    // console.log('[WebcamDataService] dataPath', dataPath);
+    return fetch(dataPath)
       .then(r => r.json() as Promise<Array<{ lat: number, lng: number }>>);
   }
 

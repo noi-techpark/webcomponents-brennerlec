@@ -66,7 +66,8 @@ if (!jsFiles.length) {
 const relativePath = jsFiles.map(dirent => {
   const fullPath = (dirent.parentPath || dirent.path) + '/' + dirent.name;
   return path.relative(distPath, fullPath);
-})
+});
+console.log('[manifest] %s files found', relativePath.length);
 
 // print files to copy
 if (process.argv.includes('-v') || process.argv.includes('--verbose')) {
@@ -77,5 +78,5 @@ if (process.argv.includes('-v') || process.argv.includes('--verbose')) {
 fileData.dist.files = relativePath;
 fs.writeFileSync(manifestFile, JSON.stringify(fileData, null, 2));
 
-console.log('[manifest] %s files found', relativePath.length);
+console.log('[manifest] done');
 

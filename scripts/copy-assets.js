@@ -11,7 +11,7 @@ const fs = require('fs');
 const path = require('path');
 
 const assetsSrc = __dirname + '/../assets';
-const assetsDst = __dirname + '/../dist/components/assets';
+const assetsDst = __dirname + '/../dist/components';
 
 fs.cpSync(assetsSrc, assetsDst, {recursive: true});
 
