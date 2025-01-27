@@ -6,11 +6,17 @@ export function translateProperty<T>(obj: { [lang: string]: T }, lang: string) {
   if ( !obj) {
     return null;
   }
-  let proposal = obj[lang] || obj['en'];
+  let proposal = obj[lang];
   if ( !proposal) {
     console.warn('Cannot find language', lang);
-    const langPresent = Object.keys(obj);
-    proposal = obj[langPresent[0]];
+    // try to use default language
+    proposal = obj['en'];
+
+    if ( !proposal) {
+      // try to use first available language
+      const langPresent = Object.keys(obj);
+      proposal = obj[langPresent[0]];
+    }
   }
   return proposal as T;
 }
