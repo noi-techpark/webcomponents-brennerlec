@@ -3,13 +3,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 import { Component, Element, forceUpdate, h, Host, Prop, State, Watch } from "@stencil/core";
-import { WebcamDataService } from "../../data/webcam/webcam-data-service";
+import { WebcamDataService } from "../data/webcam/webcam-data-service";
 import { DivIcon, LayerGroup, Map, Marker, Polyline } from 'leaflet';
-import { StencilComponent } from "../../utils/StencilComponent";
-import { getLayoutClass, resolveLayoutAuto, ViewLayout } from "../../data/breakpoints";
-import { WebcamInfoShort } from "../../data/webcam/WebcamInfoShort";
-import { Subscription } from "../../utils/TimerWatcher";
-import { LanguageDataService } from "../../data/language/language-data-service";
+import { StencilComponent } from "../utils/StencilComponent";
+import { getLayoutClass, resolveLayoutAuto, ViewLayout } from "../data/breakpoints";
+import { WebcamInfoShort } from "../data/webcam/WebcamInfoShort";
+import { Subscription } from "../utils/TimerWatcher";
+import { LanguageDataService } from "../data/language/language-data-service";
 
 @Component({
   tag: 'noi-road-webcam',
