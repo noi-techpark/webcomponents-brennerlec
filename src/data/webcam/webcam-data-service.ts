@@ -66,7 +66,7 @@ function _convertToShortInfo(info: WebcamInfo, roadName: string, requestDate: Da
   const distanceStr = info.Mapping?.[roadName]?.km || '';
   const distance = parseInt(distanceStr, 10) || 0;
 
-  // add dynamic value to image url to skip caching issue
+  // add dynamic value to image url to ignore cached value
   const u = new URL(image.ImageUrl);
   u.searchParams.append('origin', ORIGIN);
   u.searchParams.append('_', requestDate.getTime() + '');
