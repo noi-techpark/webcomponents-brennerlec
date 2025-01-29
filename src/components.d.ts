@@ -11,53 +11,124 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Map } from "leaflet";
 import { CalendarDayContext } from "./blocks/calendar-month/calendar-month.component";
+import { IconName } from "./blocks/icon/icon.component";
 import { ViewLayout } from "./data/breakpoints";
 import { WebcamInfoShort } from "./data/webcam/WebcamInfoShort";
 import { TrafficPredictionDirection, TrafficPredictionTime, TrafficPredictionValue } from "./data/traffic-prediction/TrafficPredictionShort";
 import { TrafficPredictionLocation } from "./data/traffic-prediction/TrafficPrediction";
 export { Map } from "leaflet";
 export { CalendarDayContext } from "./blocks/calendar-month/calendar-month.component";
+export { IconName } from "./blocks/icon/icon.component";
 export { ViewLayout } from "./data/breakpoints";
 export { WebcamInfoShort } from "./data/webcam/WebcamInfoShort";
 export { TrafficPredictionDirection, TrafficPredictionTime, TrafficPredictionValue } from "./data/traffic-prediction/TrafficPredictionShort";
 export { TrafficPredictionLocation } from "./data/traffic-prediction/TrafficPrediction";
 export namespace Components {
+    /**
+     * (INTERNAL) Backdrop component.
+     */
     interface NoiBackdrop {
+        /**
+          * Removing backdrop from DOM sometime can cause blink during layout recalculation. 'hidden' can be used to hide the backdrop without removing from DOM
+          * @default false
+         */
         "hidden": boolean;
     }
+    /**
+     * (INTERNAL) render leaflet map
+     */
     interface NoiBrennerlecMap {
     }
+    /**
+     * (INTERNAL) Backdrop component.
+     */
     interface NoiButton {
+        /**
+          * button 'disabled' property
+          * @default false
+         */
         "disabled": boolean;
+        /**
+          * icon-only buttons has circle shape. The size of the button can be changed with "font-size" style
+          * @default false
+         */
         "iconOnly": boolean;
     }
+    /**
+     * (INTERNAL) Calendar component.
+     * It's not encapsulated, so the styles can be applied outside of the component.
+     */
     interface NoiCalendarMonth {
+        /**
+          * Cell render function
+          * @default (context)=><span>{context.date.toLocaleDateString()}</span>
+         */
         "itemRenderer"?: (d: CalendarDayContext) => any;
+        /**
+          * Language for day names
+          * @default en
+         */
         "language": string;
+        /**
+          * calendar view date
+          * @default current date
+         */
         "viewDate": Date;
     }
+    /**
+     * (INTERNAL) render an icon.
+     * Icons are embedded inside the component (so far).
+     * Icon size can be changed by 'font-size' style
+     */
     interface NoiIcon {
-        "name": string;
+        /**
+          * icon name
+         */
+        "name": IconName | string;
     }
+    /**
+     * (INTERNAL) render an input with prefix and clear button
+     * Prefix are hardcoded to 'search' icon for now.
+     */
     interface NoiInput {
+        /**
+          * Input placeholder
+         */
         "placeholder": string;
     }
+    /**
+     * (INTERNAL) render loading indicator over the content.
+     * This allows to render content with empty data hidden behind the loader,
+     * so when data is loaded there would be no resize onf the content
+     */
     interface NoiLoading {
+        /**
+          * Input placeholder
+         */
         "isLoading": boolean;
     }
     interface NoiRoadWebcam {
         "language": string;
         "layout": ViewLayout;
     }
+    /**
+     * (INTERNAL) part of 'noi-road-webcam'
+     */
     interface NoiRoadWebcamList {
         "idSelected": string;
         "layout": ViewLayout;
         "webcamArr": WebcamInfoShort[] | null;
     }
+    /**
+     * (INTERNAL) part of 'noi-traffic-prediction'
+     */
     interface NoiTrafficDayDetails {
         "details": { [dayPart in TrafficPredictionTime]: TrafficPredictionValue };
         "direction": TrafficPredictionDirection;
     }
+    /**
+     * (INTERNAL) part of 'noi-traffic-prediction'
+     */
     interface NoiTrafficLevelBox {
         "level": TrafficPredictionValue;
     }
@@ -95,6 +166,9 @@ declare global {
     interface HTMLNoiBackdropElementEventMap {
         "backdropClick": void;
     }
+    /**
+     * (INTERNAL) Backdrop component.
+     */
     interface HTMLNoiBackdropElement extends Components.NoiBackdrop, HTMLStencilElement {
         addEventListener<K extends keyof HTMLNoiBackdropElementEventMap>(type: K, listener: (this: HTMLNoiBackdropElement, ev: NoiBackdropCustomEvent<HTMLNoiBackdropElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -112,6 +186,9 @@ declare global {
     interface HTMLNoiBrennerlecMapElementEventMap {
         "mapReady": Map;
     }
+    /**
+     * (INTERNAL) render leaflet map
+     */
     interface HTMLNoiBrennerlecMapElement extends Components.NoiBrennerlecMap, HTMLStencilElement {
         addEventListener<K extends keyof HTMLNoiBrennerlecMapElementEventMap>(type: K, listener: (this: HTMLNoiBrennerlecMapElement, ev: NoiBrennerlecMapCustomEvent<HTMLNoiBrennerlecMapElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -129,6 +206,9 @@ declare global {
     interface HTMLNoiButtonElementEventMap {
         "btnClick": MouseEvent;
     }
+    /**
+     * (INTERNAL) Backdrop component.
+     */
     interface HTMLNoiButtonElement extends Components.NoiButton, HTMLStencilElement {
         addEventListener<K extends keyof HTMLNoiButtonElementEventMap>(type: K, listener: (this: HTMLNoiButtonElement, ev: NoiButtonCustomEvent<HTMLNoiButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -143,12 +223,21 @@ declare global {
         prototype: HTMLNoiButtonElement;
         new (): HTMLNoiButtonElement;
     };
+    /**
+     * (INTERNAL) Calendar component.
+     * It's not encapsulated, so the styles can be applied outside of the component.
+     */
     interface HTMLNoiCalendarMonthElement extends Components.NoiCalendarMonth, HTMLStencilElement {
     }
     var HTMLNoiCalendarMonthElement: {
         prototype: HTMLNoiCalendarMonthElement;
         new (): HTMLNoiCalendarMonthElement;
     };
+    /**
+     * (INTERNAL) render an icon.
+     * Icons are embedded inside the component (so far).
+     * Icon size can be changed by 'font-size' style
+     */
     interface HTMLNoiIconElement extends Components.NoiIcon, HTMLStencilElement {
     }
     var HTMLNoiIconElement: {
@@ -158,6 +247,10 @@ declare global {
     interface HTMLNoiInputElementEventMap {
         "valueChange": string;
     }
+    /**
+     * (INTERNAL) render an input with prefix and clear button
+     * Prefix are hardcoded to 'search' icon for now.
+     */
     interface HTMLNoiInputElement extends Components.NoiInput, HTMLStencilElement {
         addEventListener<K extends keyof HTMLNoiInputElementEventMap>(type: K, listener: (this: HTMLNoiInputElement, ev: NoiInputCustomEvent<HTMLNoiInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -172,6 +265,11 @@ declare global {
         prototype: HTMLNoiInputElement;
         new (): HTMLNoiInputElement;
     };
+    /**
+     * (INTERNAL) render loading indicator over the content.
+     * This allows to render content with empty data hidden behind the loader,
+     * so when data is loaded there would be no resize onf the content
+     */
     interface HTMLNoiLoadingElement extends Components.NoiLoading, HTMLStencilElement {
     }
     var HTMLNoiLoadingElement: {
@@ -187,6 +285,9 @@ declare global {
     interface HTMLNoiRoadWebcamListElementEventMap {
         "itemClick": WebcamInfoShort;
     }
+    /**
+     * (INTERNAL) part of 'noi-road-webcam'
+     */
     interface HTMLNoiRoadWebcamListElement extends Components.NoiRoadWebcamList, HTMLStencilElement {
         addEventListener<K extends keyof HTMLNoiRoadWebcamListElementEventMap>(type: K, listener: (this: HTMLNoiRoadWebcamListElement, ev: NoiRoadWebcamListCustomEvent<HTMLNoiRoadWebcamListElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -201,12 +302,18 @@ declare global {
         prototype: HTMLNoiRoadWebcamListElement;
         new (): HTMLNoiRoadWebcamListElement;
     };
+    /**
+     * (INTERNAL) part of 'noi-traffic-prediction'
+     */
     interface HTMLNoiTrafficDayDetailsElement extends Components.NoiTrafficDayDetails, HTMLStencilElement {
     }
     var HTMLNoiTrafficDayDetailsElement: {
         prototype: HTMLNoiTrafficDayDetailsElement;
         new (): HTMLNoiTrafficDayDetailsElement;
     };
+    /**
+     * (INTERNAL) part of 'noi-traffic-prediction'
+     */
     interface HTMLNoiTrafficLevelBoxElement extends Components.NoiTrafficLevelBox, HTMLStencilElement {
     }
     var HTMLNoiTrafficLevelBoxElement: {
@@ -235,47 +342,128 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    /**
+     * (INTERNAL) Backdrop component.
+     */
     interface NoiBackdrop {
+        /**
+          * Removing backdrop from DOM sometime can cause blink during layout recalculation. 'hidden' can be used to hide the backdrop without removing from DOM
+          * @default false
+         */
         "hidden"?: boolean;
+        /**
+          * Emitted when user clicks on the backdrop
+         */
         "onBackdropClick"?: (event: NoiBackdropCustomEvent<void>) => void;
     }
+    /**
+     * (INTERNAL) render leaflet map
+     */
     interface NoiBrennerlecMap {
+        /**
+          * Emitted when map is initialized and ready to draw on it
+         */
         "onMapReady"?: (event: NoiBrennerlecMapCustomEvent<Map>) => void;
     }
+    /**
+     * (INTERNAL) Backdrop component.
+     */
     interface NoiButton {
+        /**
+          * button 'disabled' property
+          * @default false
+         */
         "disabled"?: boolean;
+        /**
+          * icon-only buttons has circle shape. The size of the button can be changed with "font-size" style
+          * @default false
+         */
         "iconOnly"?: boolean;
+        /**
+          * Emitted when user clicks on the button
+         */
         "onBtnClick"?: (event: NoiButtonCustomEvent<MouseEvent>) => void;
     }
+    /**
+     * (INTERNAL) Calendar component.
+     * It's not encapsulated, so the styles can be applied outside of the component.
+     */
     interface NoiCalendarMonth {
+        /**
+          * Cell render function
+          * @default (context)=><span>{context.date.toLocaleDateString()}</span>
+         */
         "itemRenderer"?: (d: CalendarDayContext) => any;
+        /**
+          * Language for day names
+          * @default en
+         */
         "language"?: string;
+        /**
+          * calendar view date
+          * @default current date
+         */
         "viewDate"?: Date;
     }
+    /**
+     * (INTERNAL) render an icon.
+     * Icons are embedded inside the component (so far).
+     * Icon size can be changed by 'font-size' style
+     */
     interface NoiIcon {
-        "name"?: string;
+        /**
+          * icon name
+         */
+        "name"?: IconName | string;
     }
+    /**
+     * (INTERNAL) render an input with prefix and clear button
+     * Prefix are hardcoded to 'search' icon for now.
+     */
     interface NoiInput {
+        /**
+          * Emitted when value is changed
+         */
         "onValueChange"?: (event: NoiInputCustomEvent<string>) => void;
+        /**
+          * Input placeholder
+         */
         "placeholder"?: string;
     }
+    /**
+     * (INTERNAL) render loading indicator over the content.
+     * This allows to render content with empty data hidden behind the loader,
+     * so when data is loaded there would be no resize onf the content
+     */
     interface NoiLoading {
+        /**
+          * Input placeholder
+         */
         "isLoading"?: boolean;
     }
     interface NoiRoadWebcam {
         "language"?: string;
         "layout"?: ViewLayout;
     }
+    /**
+     * (INTERNAL) part of 'noi-road-webcam'
+     */
     interface NoiRoadWebcamList {
         "idSelected"?: string;
         "layout"?: ViewLayout;
         "onItemClick"?: (event: NoiRoadWebcamListCustomEvent<WebcamInfoShort>) => void;
         "webcamArr"?: WebcamInfoShort[] | null;
     }
+    /**
+     * (INTERNAL) part of 'noi-traffic-prediction'
+     */
     interface NoiTrafficDayDetails {
         "details"?: { [dayPart in TrafficPredictionTime]: TrafficPredictionValue };
         "direction"?: TrafficPredictionDirection;
     }
+    /**
+     * (INTERNAL) part of 'noi-traffic-prediction'
+     */
     interface NoiTrafficLevelBox {
         "level"?: TrafficPredictionValue;
     }
@@ -304,16 +492,52 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            /**
+             * (INTERNAL) Backdrop component.
+             */
             "noi-backdrop": LocalJSX.NoiBackdrop & JSXBase.HTMLAttributes<HTMLNoiBackdropElement>;
+            /**
+             * (INTERNAL) render leaflet map
+             */
             "noi-brennerlec-map": LocalJSX.NoiBrennerlecMap & JSXBase.HTMLAttributes<HTMLNoiBrennerlecMapElement>;
+            /**
+             * (INTERNAL) Backdrop component.
+             */
             "noi-button": LocalJSX.NoiButton & JSXBase.HTMLAttributes<HTMLNoiButtonElement>;
+            /**
+             * (INTERNAL) Calendar component.
+             * It's not encapsulated, so the styles can be applied outside of the component.
+             */
             "noi-calendar-month": LocalJSX.NoiCalendarMonth & JSXBase.HTMLAttributes<HTMLNoiCalendarMonthElement>;
+            /**
+             * (INTERNAL) render an icon.
+             * Icons are embedded inside the component (so far).
+             * Icon size can be changed by 'font-size' style
+             */
             "noi-icon": LocalJSX.NoiIcon & JSXBase.HTMLAttributes<HTMLNoiIconElement>;
+            /**
+             * (INTERNAL) render an input with prefix and clear button
+             * Prefix are hardcoded to 'search' icon for now.
+             */
             "noi-input": LocalJSX.NoiInput & JSXBase.HTMLAttributes<HTMLNoiInputElement>;
+            /**
+             * (INTERNAL) render loading indicator over the content.
+             * This allows to render content with empty data hidden behind the loader,
+             * so when data is loaded there would be no resize onf the content
+             */
             "noi-loading": LocalJSX.NoiLoading & JSXBase.HTMLAttributes<HTMLNoiLoadingElement>;
             "noi-road-webcam": LocalJSX.NoiRoadWebcam & JSXBase.HTMLAttributes<HTMLNoiRoadWebcamElement>;
+            /**
+             * (INTERNAL) part of 'noi-road-webcam'
+             */
             "noi-road-webcam-list": LocalJSX.NoiRoadWebcamList & JSXBase.HTMLAttributes<HTMLNoiRoadWebcamListElement>;
+            /**
+             * (INTERNAL) part of 'noi-traffic-prediction'
+             */
             "noi-traffic-day-details": LocalJSX.NoiTrafficDayDetails & JSXBase.HTMLAttributes<HTMLNoiTrafficDayDetailsElement>;
+            /**
+             * (INTERNAL) part of 'noi-traffic-prediction'
+             */
             "noi-traffic-level-box": LocalJSX.NoiTrafficLevelBox & JSXBase.HTMLAttributes<HTMLNoiTrafficLevelBoxElement>;
             "noi-traffic-prediction": LocalJSX.NoiTrafficPrediction & JSXBase.HTMLAttributes<HTMLNoiTrafficPredictionElement>;
         }

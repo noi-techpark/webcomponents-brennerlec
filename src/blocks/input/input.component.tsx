@@ -4,6 +4,15 @@
 
 import { Component, Event, EventEmitter, h, Host, Prop, State } from "@stencil/core";
 
+/**
+ * (INTERNAL) render an input with prefix and clear button
+ *
+ * Prefix are hardcoded to 'search' icon for now.
+ *
+ * @part input-prefix - prefix component
+ * @part input-native - Native input
+ * @part clear-btn - clear input button
+ */
 @Component({
   tag: 'noi-input',
   styleUrl: 'input.css',
@@ -11,9 +20,15 @@ import { Component, Event, EventEmitter, h, Host, Prop, State } from "@stencil/c
 })
 export class InputComponent {
 
+  /**
+   * Input placeholder
+   */
   @Prop({mutable: true})
   placeholder: string;
 
+  /**
+   * Emitted when value is changed
+   */
   @Event() valueChange: EventEmitter<string>;
 
   @State()

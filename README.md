@@ -4,6 +4,18 @@ SPDX-FileCopyrightText: NOI Techpark <digital@noi.bz.it>
 SPDX-License-Identifier: CC0-1.0
 -->
 
+# Brennerlec components
+
+[![REUSE Compliance](https://github.com/noi-techpark/webcomponents-brennerlec/actions/workflows/reuse.yml/badge.svg)](https://github.com/noi-techpark/odh-docs/wiki/REUSE#badges)
+[![CI/CD](https://github.com/noi-techpark/webcomponents-brennerlec/actions/workflows/main.yml/badge.svg)](https://github.com/noi-techpark/webcomponents-brennerlec/actions/workflows/main.yml)
+[![REUSE status](https://api.reuse.software/badge/github.com/noi-techpark/webcomponents-brennerlec)](https://api.reuse.software/info/github.com/noi-techpark/webcomponents-brennerlec)
+
+This repo contains several components:
+
+**Table of Contents**
+- [Road web camera](src/noi-road-webcam/readme.md)
+- [Road traffic prediction](src/traffic-prediction/readme.md)
+
 # Webcomponent Boilerplate
 
 The webcomponent Boilerplate is the start to your project, and it contains a hello-world webcomp to show you how a basic one works and to give you a little help to start your amazing new webcomponent!
@@ -302,7 +314,7 @@ After deploying the boilerplate the webcomponent files in the SRC will be bundle
  - install the webpack-cli (the tool used to run webpack on the command line)<br>
  `npm install webpack webpack-cli --save-dev`<br>
  <br>
- 
+
 ### Creating a bundle
 To test the webcomponent on docker you'll have first to bundle all your files and assets (ex: CSS, Images, Fonts) in a single JS file. <br>
 You can also see <b>[here](https://webpack.js.org/guides/asset-management) </b>the guide provided by Webapack on how to bundle assets.<br>

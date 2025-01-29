@@ -8,6 +8,9 @@ import { WebcamInfoShort } from "../../../data/webcam/WebcamInfoShort";
 import { LanguageDataService } from "../../../data/language/language-data-service";
 import { getLayoutClass, ViewLayout } from "../../../data/breakpoints";
 
+/**
+ * (INTERNAL) part of 'noi-road-webcam'
+ */
 @Component({
   tag: 'noi-road-webcam-list',
   styleUrl: 'road-webcam-list.css',

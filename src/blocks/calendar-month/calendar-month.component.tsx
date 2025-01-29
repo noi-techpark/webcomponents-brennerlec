@@ -19,18 +19,38 @@ export interface CalendarDayContext {
   isLastWeek: boolean;
 }
 
+/**
+ * (INTERNAL) Calendar component.
+ *
+ * It's not encapsulated, so the styles can be applied outside of the component.
+ */
 @Component({
   tag: 'noi-calendar-month',
   styleUrl: 'calendar-month.css',
 })
 export class CalendarMonthComponent {
 
+  /**
+   * calendar view date
+   *
+   * @default current date
+   */
   @Prop({mutable: true})
   viewDate: Date = new Date();
 
+  /**
+   * Language for day names
+   *
+   * @default en
+   */
   @Prop({mutable: true})
   language = 'en';
 
+  /**
+   * Cell render function
+   *
+   * @default (context)=><span>{context.date.toLocaleDateString()}</span>
+   */
   @Prop()
   itemRenderer?: (d: CalendarDayContext) => any;
 
@@ -111,7 +131,6 @@ export class CalendarMonthComponent {
   }
 
   _renderDay(context: CalendarDayContext) {
-
     if (this.itemRenderer) {
       return this.itemRenderer(context);
     } else {

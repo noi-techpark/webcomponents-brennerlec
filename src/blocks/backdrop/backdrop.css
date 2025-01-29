@@ -34,7 +34,7 @@
    */
   background: var(--backdrop-color, rgba(0, 0, 0, 0.1));
   /**
-   * @prop --backdrop-filter: backdrop color
+   * @prop --backdrop-filter: backdrop filter
    */
   backdrop-filter: var(--backdrop-filter, none);
 }

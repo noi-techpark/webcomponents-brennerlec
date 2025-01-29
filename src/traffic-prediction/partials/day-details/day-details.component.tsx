@@ -22,6 +22,9 @@ const directionLabels = {
   'south': 'SUD',
 }
 
+/**
+ * (INTERNAL) part of 'noi-traffic-prediction'
+ */
 @Component({
   tag: 'noi-traffic-day-details',
   styleUrl: 'day-details.css',

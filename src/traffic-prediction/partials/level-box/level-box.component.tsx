@@ -13,6 +13,9 @@ const titles = {
   "none": "No data",
 }
 
+/**
+ * (INTERNAL) part of 'noi-traffic-prediction'
+ */
 @Component({
   tag: 'noi-traffic-level-box',
   styleUrl: 'level-box.css',
