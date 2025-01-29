@@ -19,7 +19,7 @@ export function getLayoutClass(layout: ViewLayout) {
     case "mobile":
       return 'layout layout--mobile';
     default:
-      console.warn(`Unknown layout layout: ${layout}`);
+      console.warn(`Unknown layout: ${layout}`);
       return 'layout';
   }
 }

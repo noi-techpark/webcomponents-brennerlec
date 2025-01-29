@@ -21,7 +21,7 @@ SPDX-License-Identifier: CC0-1.0
 Code Snippet for web build:
 <pre style="overflow: hidden">
   <code>
-    &lt;noi-traffic-prediction style="height: 600px; width: 100%;"&gt;&lt;/noi-traffic-prediction&gt;
+    &lt;noi-road-webcam style="height: 600px; width: 100%;"&gt;&lt;/noi-road-webcam&gt;
 
     &lt;script type="module" src="./noi-brennerlec.esm.js"&gt;&lt;/script&gt;
   </code>
@@ -31,9 +31,7 @@ Code Snippet for web build:
 Output:
 
 <!--  <hello-world name="Hello World!"></hello-world>-->
-<div>
-  <noi-traffic-prediction id="webcam" location="Brennero" style="height: 670px; width: 100%"></noi-traffic-prediction>
-</div>
+<noi-road-webcam id="webcam" style="height: 600px; width: 100%"></noi-road-webcam>
 
 <script nomodule src="./noi-brennerlec.js"></script>
 <script type="module" src="./noi-brennerlec.esm.js"></script>
@@ -51,18 +49,8 @@ Output:
   <button onclick="webcam.language = 'it'">lang: it</button>
   <button onclick="webcam.language = 'xx'">lang: xx (missing)</button>
   <button onclick="webcam.language = null">lang: auto</button>
-  <button onclick="webcam.classList.remove('dark'); webcam.classList.remove('dark-alt')">styles: default</button>
-  <button onclick="webcam.classList.add('dark'); webcam.classList.remove('dark-alt')">styles: dark mode</button>
-  <button onclick="webcam.classList.remove('dark'); webcam.classList.add('dark-alt')">styles: dark mode alt</button>
-
-  <script>
-    function changeFontSize(change) {
-      const currentSize = parseInt(webcam.style.fontSize || '16px', 10);
-      webcam.style.fontSize = (currentSize + change) + 'px';
-    }
-  </script>
-  <button onclick="changeFontSize(-1)">font -</button>
-  <button onclick="changeFontSize(1)">font +</button>
+  <button onclick="webcam.classList.remove('dark')">styles: default</button>
+  <button onclick="webcam.classList.add('dark')">styles: dark mode</button>
 </div>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,60 +58,25 @@ Output:
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet">
 <style>
-  noi-traffic-prediction {
+  noi-road-webcam {
     font-family: "Roboto", serif;
     outline: 1px solid red;
+    margin: 5px;
   }
 
-  noi-traffic-prediction.dark {
+  noi-road-webcam.dark {
     font-family: "Roboto", serif;
     outline: 1px solid red;
+    margin: 5px;
 
     --color-primary: rgb(224, 224, 224);
     --color-primary-rgb: 224, 224, 224;
+    --color-secondary: rgb(23, 162, 184);
     --color-text: #FFF;
     --color-background: #333;
-    --color-background-shade: #474747;
-  }
-
-  noi-traffic-prediction.dark-alt {
-    font-family: "Roboto", serif;
-    outline: 1px solid red;
-
-    --color-primary: rgb(224, 224, 224);
-    --color-primary-rgb: 224, 224, 224;
-    --color-secondary: rgb(192, 192, 192);
-    --color-secondary-rgb: 192, 192, 192;
-    --color-text: #FFF;
-    --color-background: #333;
-    --color-background-shade: #474747;
-
-    --color-border: #474747;
-
-    --color-busy-regular: #166c45;
-    --color-busy-critical: linear-gradient(135deg,
-    rgb(250, 184, 19) 0%,
-    rgb(250, 184, 19) 10%,
-    rgb(230, 34, 67) 11%,
-    rgb(230, 34, 67) 21%,
-    rgb(250, 184, 19) 22%,
-    rgb(250, 184, 19) 32%,
-    rgb(230, 34, 67) 33%,
-    rgb(230, 34, 67) 43%,
-    rgb(250, 184, 19) 44%,
-    rgb(250, 184, 19) 54%,
-    rgb(230, 34, 67) 55%,
-    rgb(230, 34, 67) 65%,
-    rgb(250, 184, 19) 66%,
-    rgb(250, 184, 19) 76%,
-    rgb(230, 34, 67) 77%,
-    rgb(230, 34, 67) 87%,
-    rgb(250, 184, 19) 88%,
-    rgb(250, 184, 19) 100%
-    );
-
-    --backdrop-color: rgba(128, 128, 128, 0.5);
-    --backdrop-filter: blur(3px);
+    --color-marker: #5d8d58;
+    --color-marker-bg: #282828;
+    --map-filter: grayscale(100%) invert(1);
   }
 </style>
 

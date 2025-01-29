@@ -11,3 +11,9 @@ export interface ListResponse<T> {
   Seed: string;
   Items: T[];
 }
+
+
+export interface ListResponseV2<T> {
+  offset:number;
+  data: T[];
+}

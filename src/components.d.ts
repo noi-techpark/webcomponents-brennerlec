@@ -10,11 +10,17 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Map } from "leaflet";
+import { CalendarDayContext } from "./blocks/calendar-month/calendar-month.component";
 import { ViewLayout } from "./data/breakpoints";
 import { WebcamInfoShort } from "./data/webcam/WebcamInfoShort";
+import { TrafficPredictionDirection, TrafficPredictionTime, TrafficPredictionValue } from "./data/traffic-prediction/TrafficPredictionShort";
+import { TrafficPredictionLocation } from "./data/traffic-prediction/TrafficPrediction";
 export { Map } from "leaflet";
+export { CalendarDayContext } from "./blocks/calendar-month/calendar-month.component";
 export { ViewLayout } from "./data/breakpoints";
 export { WebcamInfoShort } from "./data/webcam/WebcamInfoShort";
+export { TrafficPredictionDirection, TrafficPredictionTime, TrafficPredictionValue } from "./data/traffic-prediction/TrafficPredictionShort";
+export { TrafficPredictionLocation } from "./data/traffic-prediction/TrafficPrediction";
 export namespace Components {
     interface NoiBackdrop {
         "hidden": boolean;
@@ -25,11 +31,19 @@ export namespace Components {
         "disabled": boolean;
         "iconOnly": boolean;
     }
+    interface NoiCalendarMonth {
+        "itemRenderer"?: (d: CalendarDayContext) => any;
+        "language": string;
+        "viewDate": Date;
+    }
     interface NoiIcon {
         "name": string;
     }
     interface NoiInput {
         "placeholder": string;
+    }
+    interface NoiLoading {
+        "isLoading": boolean;
     }
     interface NoiRoadWebcam {
         "language": string;
@@ -39,6 +53,22 @@ export namespace Components {
         "idSelected": string;
         "layout": ViewLayout;
         "webcamArr": WebcamInfoShort[] | null;
+    }
+    interface NoiTrafficDayDetails {
+        "details": { [dayPart in TrafficPredictionTime]: TrafficPredictionValue };
+        "direction": TrafficPredictionDirection;
+    }
+    interface NoiTrafficLevelBox {
+        "level": TrafficPredictionValue;
+    }
+    interface NoiTrafficPrediction {
+        "changeViewMonth": (change: number) => Promise<void>;
+        "language": string;
+        "layout": ViewLayout;
+        "location": TrafficPredictionLocation;
+        "resetToCurrentMonth": () => Promise<void>;
+        "selectDay": (day: Date | null) => Promise<void>;
+        "viewDate": Date;
     }
 }
 export interface NoiBackdropCustomEvent<T> extends CustomEvent<T> {
@@ -113,6 +143,12 @@ declare global {
         prototype: HTMLNoiButtonElement;
         new (): HTMLNoiButtonElement;
     };
+    interface HTMLNoiCalendarMonthElement extends Components.NoiCalendarMonth, HTMLStencilElement {
+    }
+    var HTMLNoiCalendarMonthElement: {
+        prototype: HTMLNoiCalendarMonthElement;
+        new (): HTMLNoiCalendarMonthElement;
+    };
     interface HTMLNoiIconElement extends Components.NoiIcon, HTMLStencilElement {
     }
     var HTMLNoiIconElement: {
@@ -135,6 +171,12 @@ declare global {
     var HTMLNoiInputElement: {
         prototype: HTMLNoiInputElement;
         new (): HTMLNoiInputElement;
+    };
+    interface HTMLNoiLoadingElement extends Components.NoiLoading, HTMLStencilElement {
+    }
+    var HTMLNoiLoadingElement: {
+        prototype: HTMLNoiLoadingElement;
+        new (): HTMLNoiLoadingElement;
     };
     interface HTMLNoiRoadWebcamElement extends Components.NoiRoadWebcam, HTMLStencilElement {
     }
@@ -159,14 +201,37 @@ declare global {
         prototype: HTMLNoiRoadWebcamListElement;
         new (): HTMLNoiRoadWebcamListElement;
     };
+    interface HTMLNoiTrafficDayDetailsElement extends Components.NoiTrafficDayDetails, HTMLStencilElement {
+    }
+    var HTMLNoiTrafficDayDetailsElement: {
+        prototype: HTMLNoiTrafficDayDetailsElement;
+        new (): HTMLNoiTrafficDayDetailsElement;
+    };
+    interface HTMLNoiTrafficLevelBoxElement extends Components.NoiTrafficLevelBox, HTMLStencilElement {
+    }
+    var HTMLNoiTrafficLevelBoxElement: {
+        prototype: HTMLNoiTrafficLevelBoxElement;
+        new (): HTMLNoiTrafficLevelBoxElement;
+    };
+    interface HTMLNoiTrafficPredictionElement extends Components.NoiTrafficPrediction, HTMLStencilElement {
+    }
+    var HTMLNoiTrafficPredictionElement: {
+        prototype: HTMLNoiTrafficPredictionElement;
+        new (): HTMLNoiTrafficPredictionElement;
+    };
     interface HTMLElementTagNameMap {
         "noi-backdrop": HTMLNoiBackdropElement;
         "noi-brennerlec-map": HTMLNoiBrennerlecMapElement;
         "noi-button": HTMLNoiButtonElement;
+        "noi-calendar-month": HTMLNoiCalendarMonthElement;
         "noi-icon": HTMLNoiIconElement;
         "noi-input": HTMLNoiInputElement;
+        "noi-loading": HTMLNoiLoadingElement;
         "noi-road-webcam": HTMLNoiRoadWebcamElement;
         "noi-road-webcam-list": HTMLNoiRoadWebcamListElement;
+        "noi-traffic-day-details": HTMLNoiTrafficDayDetailsElement;
+        "noi-traffic-level-box": HTMLNoiTrafficLevelBoxElement;
+        "noi-traffic-prediction": HTMLNoiTrafficPredictionElement;
     }
 }
 declare namespace LocalJSX {
@@ -182,12 +247,20 @@ declare namespace LocalJSX {
         "iconOnly"?: boolean;
         "onBtnClick"?: (event: NoiButtonCustomEvent<MouseEvent>) => void;
     }
+    interface NoiCalendarMonth {
+        "itemRenderer"?: (d: CalendarDayContext) => any;
+        "language"?: string;
+        "viewDate"?: Date;
+    }
     interface NoiIcon {
         "name"?: string;
     }
     interface NoiInput {
         "onValueChange"?: (event: NoiInputCustomEvent<string>) => void;
         "placeholder"?: string;
+    }
+    interface NoiLoading {
+        "isLoading"?: boolean;
     }
     interface NoiRoadWebcam {
         "language"?: string;
@@ -199,14 +272,32 @@ declare namespace LocalJSX {
         "onItemClick"?: (event: NoiRoadWebcamListCustomEvent<WebcamInfoShort>) => void;
         "webcamArr"?: WebcamInfoShort[] | null;
     }
+    interface NoiTrafficDayDetails {
+        "details"?: { [dayPart in TrafficPredictionTime]: TrafficPredictionValue };
+        "direction"?: TrafficPredictionDirection;
+    }
+    interface NoiTrafficLevelBox {
+        "level"?: TrafficPredictionValue;
+    }
+    interface NoiTrafficPrediction {
+        "language"?: string;
+        "layout"?: ViewLayout;
+        "location"?: TrafficPredictionLocation;
+        "viewDate"?: Date;
+    }
     interface IntrinsicElements {
         "noi-backdrop": NoiBackdrop;
         "noi-brennerlec-map": NoiBrennerlecMap;
         "noi-button": NoiButton;
+        "noi-calendar-month": NoiCalendarMonth;
         "noi-icon": NoiIcon;
         "noi-input": NoiInput;
+        "noi-loading": NoiLoading;
         "noi-road-webcam": NoiRoadWebcam;
         "noi-road-webcam-list": NoiRoadWebcamList;
+        "noi-traffic-day-details": NoiTrafficDayDetails;
+        "noi-traffic-level-box": NoiTrafficLevelBox;
+        "noi-traffic-prediction": NoiTrafficPrediction;
     }
 }
 export { LocalJSX as JSX };
@@ -216,10 +307,15 @@ declare module "@stencil/core" {
             "noi-backdrop": LocalJSX.NoiBackdrop & JSXBase.HTMLAttributes<HTMLNoiBackdropElement>;
             "noi-brennerlec-map": LocalJSX.NoiBrennerlecMap & JSXBase.HTMLAttributes<HTMLNoiBrennerlecMapElement>;
             "noi-button": LocalJSX.NoiButton & JSXBase.HTMLAttributes<HTMLNoiButtonElement>;
+            "noi-calendar-month": LocalJSX.NoiCalendarMonth & JSXBase.HTMLAttributes<HTMLNoiCalendarMonthElement>;
             "noi-icon": LocalJSX.NoiIcon & JSXBase.HTMLAttributes<HTMLNoiIconElement>;
             "noi-input": LocalJSX.NoiInput & JSXBase.HTMLAttributes<HTMLNoiInputElement>;
+            "noi-loading": LocalJSX.NoiLoading & JSXBase.HTMLAttributes<HTMLNoiLoadingElement>;
             "noi-road-webcam": LocalJSX.NoiRoadWebcam & JSXBase.HTMLAttributes<HTMLNoiRoadWebcamElement>;
             "noi-road-webcam-list": LocalJSX.NoiRoadWebcamList & JSXBase.HTMLAttributes<HTMLNoiRoadWebcamListElement>;
+            "noi-traffic-day-details": LocalJSX.NoiTrafficDayDetails & JSXBase.HTMLAttributes<HTMLNoiTrafficDayDetailsElement>;
+            "noi-traffic-level-box": LocalJSX.NoiTrafficLevelBox & JSXBase.HTMLAttributes<HTMLNoiTrafficLevelBoxElement>;
+            "noi-traffic-prediction": LocalJSX.NoiTrafficPrediction & JSXBase.HTMLAttributes<HTMLNoiTrafficPredictionElement>;
         }
     }
 }
