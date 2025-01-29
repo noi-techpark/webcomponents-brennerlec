@@ -1,0 +1,22 @@
+/*
+ * SPDX-FileCopyrightText: 2025 NOI Techpark <digital@noi.bz.it>
+ *
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
+
+/* ':host' selector is not effective */
+noi-brennerlec-map {
+  display: block;
+  contain: content;
+  box-sizing: border-box;
+
+  /**
+   * @prop --color---map-filter: Map filter
+   */
+  --map-filter--inner: var(--map-filter, grayscale(100%));
+}
+
+.leaflet-tile {
+  /*filter: grayscale(100%);*/
+  filter: var(--map-filter--inner);
+}

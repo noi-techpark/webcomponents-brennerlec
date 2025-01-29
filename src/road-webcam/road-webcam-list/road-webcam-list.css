@@ -1,0 +1,154 @@
+/*
+ * SPDX-FileCopyrightText: 2025 NOI Techpark <digital@noi.bz.it>
+ *
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
+
+:host {
+  padding: 4px 12px;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+:host(.layout--mobile) {
+  min-height: 199px;
+}
+
+:host(.layout--tablet) {
+  min-height: 160px;
+}
+
+:host(.layout--tablet) .list,
+:host(.layout--mobile) .list {
+  display: flex;
+  overflow-x: auto;
+  gap: 5px;
+}
+
+:host(.layout--tablet) .list .item,
+:host(.layout--mobile) .list .item {
+  display: flex;
+  flex: 0 0 120px;
+  height: 80px;
+  max-height: 80px;
+}
+
+:host(.layout--tablet) .list .item__image,
+:host(.layout--mobile) .list .item__image {
+  display: none;
+}
+
+:host(.layout--tablet) .title-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+}
+
+.title-wrapper {
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-primary--inner);
+  padding: 10px 0;
+
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.title__icon {
+  color: var(--color-secondary--inner);
+}
+
+.title__text {
+  flex: 1;
+}
+
+.list {
+  flex: 1;
+  overflow: auto;
+}
+
+
+/*  button */
+.item {
+  display: grid;
+  grid-template-columns: 1fr 56px;
+  align-items: center;
+  grid-gap: 8px;
+
+  border: none;
+  background: transparent;
+  text-align: left;
+  padding: 8px;
+  width: 100%;
+  font-family: inherit;
+
+  border-bottom: 1px solid var(--color-primary--inner);
+  cursor: pointer;
+  overflow: hidden;
+  user-select: none;
+}
+
+.item__wrapper {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.item.item--selected,
+.item:hover,
+.item:focus {
+  background: rgba(var(--color-primary-rgb--inner), 0.2);
+}
+
+.item__title {
+  flex: 1;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text--inner);
+}
+
+.item__description {
+  flex-shrink: 0;
+  padding-top: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-primary--inner);
+  opacity: 0.6;
+}
+
+.item__image {
+  height: 49px;
+  width: 56px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/**/
+.no-data {
+  text-align: center;
+  font-style: italic;
+  opacity: 0.6;
+  color: var(--color-text--inner);
+}
+
+/**/
+.ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
