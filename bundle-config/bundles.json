@@ -1,0 +1,28 @@
+[
+  {
+    "name": "noi-road-webcam",
+    "entryPoint": "dist/components/noi-road-webcam.js",
+    "outputDir": "dist/bundle/noi-road-webcam",
+    "manifest": "bundle-config/road-webcam.wcs-manifest.json",
+    "copy": [
+      {
+        "src": "assets/data_a22-1km.json",
+        "dst": "."
+      },
+      {
+        "src": "assets/i18n_en.json",
+        "dst": "."
+      },
+      {
+        "src": "assets/i18n_it.json",
+        "dst": "."
+      }
+    ]
+  },
+  {
+    "name": "traffic-prediction",
+    "entryPoint": "dist/components/noi-traffic-prediction.js",
+    "outputDir": "dist/bundle/noi-traffic-prediction",
+    "manifest": "bundle-config/traffic-prediction.wcs-manifest.json"
+  }
+]

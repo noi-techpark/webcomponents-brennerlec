@@ -1,0 +1,87 @@
+{
+  "title": "Hello-world",
+  "shortName": "hello-world-2",
+  "description": "Hello world simple webcomp example",
+  "descriptionAbstract": "Hello world simple webcomp example",
+  "license": "AGPL-3.0-or-later",
+  "repositoryUrl": "https://github.com/noi-techpark/webcomponents-brennerlec.git",
+  "copyrightHolders": [
+    {
+      "name": "NOI",
+      "email": "info@noi.bz.it",
+      "organization": "NOI S.p.A",
+      "organizationUrl": "https://noi.bz.it"
+    }
+  ],
+  "authors": [
+    {
+      "name": "NOI",
+      "email": "digital@noi.bz.it",
+      "organization": "NOI S.p.A",
+      "organizationUrl": "https://noi.bz.it"
+    },
+    {
+      "name": "Solhea",
+      "email": "info@solhea.com",
+      "organization": "Solhea S.R.L.",
+      "organizationUrl": "https://solhea.com"
+    }
+  ],
+  "image": "wcs-logo.png",
+  "searchTags": [],
+  "dist": {
+    "basePath": "dist/components",
+    "files": [
+      "--set by build script--"
+    ],
+    "scripts": [
+      {
+        "file": "noi-road-webcam.js",
+        "parameter": "type='module'"
+      }
+    ]
+  },
+  "configuration": {
+    "tagName": "noi-road-webcam",
+    "options": [
+      {
+        "key": "layout",
+        "type": "select",
+        "label": "Layout appearance",
+        "required": false,
+        "options": {
+          "values": [
+            "desktop",
+            "tablet",
+            "mobile",
+            "auto"
+          ],
+          "default": "auto"
+        }
+      },
+      {
+        "key": "language",
+        "type": "select",
+        "label": "Two letter key for the language to be used, if omitted the widget will use the browser language. Fallback is `en`",
+        "required": false,
+        "options": {
+          "values": [
+            "en",
+            "de",
+            "it"
+          ],
+          "default": "en"
+        }
+      },
+      {
+        "key": "style",
+        "type": "text",
+        "label": "CSS style definition",
+        "required": false,
+        "options": {
+          "default": "--color-primary: #0068B4; --color-primary-rgb: 0, 104, 180; --color-secondary: #00A767; --color-marker: #3a9c77; --color-marker-bg: #FFFFFF; --color-text: #333333; --color-background: #FFFFFF"
+        }
+      }
+    ]
+  }
+}
