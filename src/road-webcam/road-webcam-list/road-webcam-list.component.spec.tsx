@@ -44,10 +44,10 @@ describe('noi-road-webcam-list', () => {
 
     const page = await newSpecPage({
       components: [RoadWebcamListComponent],
-      template: () => (<noi-road-webcam-list layoutClass="desktop"></noi-road-webcam-list>),
+      template: () => (<noi-road-webcam-list layout="desktop"></noi-road-webcam-list>),
     });
 
-    expect(page.root.classList.contains('desktop')).toBe(true);
+    expect(page.root.classList.contains('layout--desktop')).toBe(true);
   });
 
   it('should render layout class: tablet', async () => {
@@ -58,10 +58,10 @@ describe('noi-road-webcam-list', () => {
 
     const page = await newSpecPage({
       components: [RoadWebcamListComponent],
-      template: () => (<noi-road-webcam-list layoutClass="tablet"></noi-road-webcam-list>),
+      template: () => (<noi-road-webcam-list layout="tablet"></noi-road-webcam-list>),
     });
 
-    expect(page.root.classList.contains('tablet')).toBe(true);
+    expect(page.root.classList.contains('layout--tablet')).toBe(true);
   });
 
   it('should render layout class: mobile', async () => {
@@ -72,10 +72,10 @@ describe('noi-road-webcam-list', () => {
 
     const page = await newSpecPage({
       components: [RoadWebcamListComponent],
-      template: () => (<noi-road-webcam-list layoutClass="mobile"></noi-road-webcam-list>),
+      template: () => (<noi-road-webcam-list layout="mobile"></noi-road-webcam-list>),
     });
 
 
-    expect(page.root.classList.contains('mobile')).toBe(true);
+    expect(page.root.classList.contains('layout--mobile')).toBe(true);
   });
 });

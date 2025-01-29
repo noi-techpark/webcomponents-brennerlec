@@ -6,6 +6,7 @@ import { Component, Element, Event, EventEmitter, forceUpdate, h, Host, Prop, St
 import { prepareSearchString } from "../../utils/quickSearch";
 import { WebcamInfoShort } from "../../data/webcam/WebcamInfoShort";
 import { LanguageDataService } from "../../data/language/language-data-service";
+import { getLayoutClass, ViewLayout } from "../../data/breakpoints";
 
 @Component({
   tag: 'noi-road-webcam-list',
@@ -21,7 +22,7 @@ export class RoadWebcamListComponent {
   idSelected: string = null;
 
   @Prop({mutable: true})
-  layoutClass: string = '';
+  layout: ViewLayout;
 
   @State()
   searchString: string = null;
@@ -81,7 +82,7 @@ export class RoadWebcamListComponent {
   }
 
   render() {
-    return <Host class={this.layoutClass}>
+    return <Host class={getLayoutClass(this.layout)}>
       <div class="title-wrapper">
         <div class="title ellipsis">
           <noi-icon class="title__icon" name="stations"></noi-icon>
