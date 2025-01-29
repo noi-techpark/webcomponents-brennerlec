@@ -47,7 +47,7 @@ export class RoadWebcamListComponent {
   }
 
   init() {
-    this.languageService = LanguageDataService.getInstance();
+    this.languageService = LanguageDataService.getInstance('rw');
   }
 
   connectedCallback() {

@@ -63,7 +63,7 @@ export class TrafficPredictionComponent implements StencilComponent {
 
   init() {
     // initialize services in 'init', so it can be overridden in tests
-    this.languageService = LanguageDataService.getInstance();
+    this.languageService = LanguageDataService.getInstance('tp');
     this.trafficPredictionService = new TrafficPredictionDataService();
   }
 

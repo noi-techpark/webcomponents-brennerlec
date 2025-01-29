@@ -58,7 +58,7 @@ export class RoadWebcamComponent implements StencilComponent {
   }
 
   init() {
-    this.languageService = LanguageDataService.getInstance();
+    this.languageService = LanguageDataService.getInstance('rw');
     this.webcamDataService = new WebcamDataService();
   }
 

@@ -33,9 +33,9 @@
     "basePath": ".",
     "files": [
       "noi-road-webcam.js",
-      "data_a22-1km.json",
-      "i18n_en.json",
-      "i18n_it.json"
+      "rw_data_a22-1km.json",
+      "rw_i18n_en.json",
+      "rw_i18n_it.json"
     ],
     "scripts": [
       {

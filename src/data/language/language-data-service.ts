@@ -20,13 +20,13 @@ export class LanguageDataService {
   /**
    * @private
    */
-  constructor() {
+  constructor(private appPrefix: string) {
     this.browserLanguage = this.detectBrowserLanguage() || DEFAULT_LANGUAGE;
   }
 
-  static getInstance() {
+  static getInstance(appPrefix: string) {
     if ( !LanguageDataService.instance) {
-      LanguageDataService.instance = new LanguageDataService();
+      LanguageDataService.instance = new LanguageDataService(appPrefix);
     }
     return LanguageDataService.instance;
   }
@@ -79,7 +79,7 @@ export class LanguageDataService {
 
   _fetchLanguageData(lang: string) {
     if ( !this.languageData[lang]) {
-      const dataPath = getAssetPath('i18n_' + lang + '.json');
+      const dataPath = getAssetPath(this.appPrefix + '_i18n_' + lang + '.json');
       // console.log('[LanguageDataService] dataPath', dataPath);
       return fetch(dataPath)
         .then(r => r.json())
