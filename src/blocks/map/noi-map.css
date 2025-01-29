@@ -9,14 +9,11 @@ noi-brennerlec-map {
   display: block;
   contain: content;
   box-sizing: border-box;
-
-  /**
-   * @prop --color---map-filter: Map filter
-   */
-  --map-filter--inner: var(--map-filter, grayscale(100%));
 }
 
 .leaflet-tile {
-  /*filter: grayscale(100%);*/
-  filter: var(--map-filter--inner);
+  /**
+   * @prop --map-filter: Map filter
+   */
+  filter: var(--map-filter, grayscale(100%));
 }

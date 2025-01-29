@@ -88,7 +88,8 @@ export class RoadWebcamListComponent {
           <noi-icon class="title__icon" name="stations"></noi-icon>
           <span class="title__text">{this.languageService.translate('app.list.title')}</span>
         </div>
-        <noi-input placeholder={this.languageService.translate('app.list.search.placeholder')}
+        <noi-input class="title__search"
+                   placeholder={this.languageService.translate('app.list.search.placeholder')}
                    onValueChange={v => this.filterData(v.detail)}></noi-input>
       </div>
       <div class="list">

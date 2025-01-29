@@ -34,6 +34,7 @@ export class ButtonComponent {
 
     return <Host class={hostClass}>
       <button class={btnClass}
+              part="button-native"
               type="button"
               disabled={this.disabled}
               onClick={(e) => this.btnClick.emit(e)}>

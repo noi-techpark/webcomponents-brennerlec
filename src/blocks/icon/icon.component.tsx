@@ -4,6 +4,18 @@
 
 import { Component, h, Prop } from "@stencil/core";
 
+export type IconName = 'close'
+  | 'stations'
+  | 'search'
+  ;
+
+/**
+ * (INTERNAL) render an icon.
+ *
+ * Icons are embedded inside the component (so far).
+ *
+ * Icon size can be changed by 'font-size' style
+ */
 @Component({
   tag: 'noi-icon',
   styleUrl: 'icon.css',
@@ -11,6 +23,9 @@ import { Component, h, Prop } from "@stencil/core";
 })
 export class IconComponent {
 
+  /**
+   * icon name
+   */
   @Prop()
   name: string;
 
