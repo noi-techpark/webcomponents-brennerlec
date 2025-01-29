@@ -65,6 +65,7 @@ export class RoadWebcamComponent implements StencilComponent {
   connectedCallback() {
     this.languageService.onLanguageChange.bind(this._onLanguageChanged);
     this.languageService.useLanguage(this.language);
+    this._recalculateLayoutClass();
     this._watchSize();
   }
 
@@ -218,26 +219,27 @@ export class RoadWebcamComponent implements StencilComponent {
         <div class="layout__center">
           <noi-brennerlec-map part="map" onMapReady={e => this.mapReady(e)}></noi-brennerlec-map>
           <noi-backdrop hidden={ !this.selectedCameraInfo} onBackdropClick={() => this.onBackdropClick()}>
-            {this.selectedCameraInfo ?
-              <div class="popup" part="popup">
-                <div class="popup__title">
-                  <span class="popup__title-text">{this.selectedCameraInfo.title}</span>
-                  <noi-button class="popup__close-btn" iconOnly={true} onBtnClick={() => this._selectCamera(null)}>
-                    <noi-icon name="close"></noi-icon>
-                  </noi-button>
-                </div>
-                <div class="popup__subtitle">{this.selectedCameraInfo.description}</div>
-                {/*<div class="popup__image" style={{backgroundImage: 'url("' + this.selectedCameraInfo.Webcamurl + '")'}}></div>*/}
-                <img class="popup__image"
-                     src={this.selectedCameraInfo.image.imageUrl}
-                     alt={this.selectedCameraInfo.image.imageName}/>
-                <div class="popup__subtitle">{this.selectedCameraInfo.lastChangeLocalized}</div>
-              </div>
-              : ''}
+            {this.selectedCameraInfo ? this._renderPopup() : null}
           </noi-backdrop>
         </div>
       </Host>
     );
   }
 
+  _renderPopup() {
+    return (<div class="popup" part="popup">
+      <div class="popup__title">
+        <span class="popup__title-text">{this.selectedCameraInfo.title}</span>
+        <noi-button class="popup__close-btn" iconOnly={true} onBtnClick={() => this._selectCamera(null)}>
+          <noi-icon name="close"></noi-icon>
+        </noi-button>
+      </div>
+      <div class="popup__subtitle">{this.selectedCameraInfo.description}</div>
+      {/*<div class="popup__image" style={{backgroundImage: 'url("' + this.selectedCameraInfo.Webcamurl + '")'}}></div>*/}
+      <img class="popup__image"
+           src={this.selectedCameraInfo.image.imageUrl}
+           alt={this.selectedCameraInfo.image.imageName}/>
+      <div class="popup__subtitle">{this.selectedCameraInfo.lastChangeLocalized}</div>
+    </div>);
+  }
 }

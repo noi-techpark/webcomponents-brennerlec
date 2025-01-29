@@ -94,7 +94,8 @@ export class RoadWebcamListComponent {
       </div>
       <div class="list">
         {this.webcamArrFiltered.map(this._renderItem)}
-        {this.webcamArrFiltered.length ? '' : <div class="no-data">{this.languageService.translate('app.list.empty')}</div>}
+        {this.webcamArrFiltered.length ? '' :
+          <div class="no-data">{this.languageService.translate('app.list.empty')}</div>}
       </div>
     </Host>
   }
@@ -104,14 +105,14 @@ export class RoadWebcamListComponent {
     if (this.idSelected === camera.id) {
       itemClass += ' item--selected';
     }
-    return <button type="button"
-                   class={itemClass}
-                   onClick={() => this.itemClick.emit(camera)}>
+    return (<button type="button"
+                    class={itemClass}
+                    onClick={() => this.itemClick.emit(camera)}>
       <div class="item__wrapper">
         <div class="item__title">{camera.title}</div>
         <div class="item__description ellipsis">{camera.lastChangeLocalized}</div>
       </div>
       <div class="item__image" style={{backgroundImage: 'url("' + camera.image.imageUrl + '")'}}></div>
-    </button>
+    </button>);
   }
 }
