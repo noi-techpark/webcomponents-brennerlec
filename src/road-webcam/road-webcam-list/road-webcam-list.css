@@ -74,6 +74,16 @@
   flex: 1;
 }
 
+.title__search {
+  --color-text: var(--color-text--inner);
+  --color-background: var(--color-background--inner);
+}
+
+.title__search::part(clear-btn) {
+  --color-bg-hover: var(--color-button-hover--inner);
+}
+
+
 .list {
   flex: 1;
   overflow: auto;

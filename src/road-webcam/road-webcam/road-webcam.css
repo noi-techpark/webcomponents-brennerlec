@@ -46,6 +46,8 @@
    */
   --color-background--inner: var(--color-background, #FFFFFF);
 
+  /* private */
+  --color-button-hover--inner: rgba(var(--color-primary-rgb--inner), 0.2);
 }
 
 :host(.layout--tablet),
@@ -83,7 +85,6 @@ noi-brennerlec-map {
 
 
 .popup__title {
-  font-size: 22px;
   font-weight: 500;
   color: var(--color-primary--inner);
 
@@ -93,6 +94,7 @@ noi-brennerlec-map {
 }
 
 .popup__title-text {
+  font-size: 22px;
   flex: 1;
 }
 
@@ -108,6 +110,10 @@ noi-brennerlec-map {
   max-width: 465px;
   overflow: hidden;
   object-fit: contain;
+}
+
+.popup__close-btn {
+  --color-bg-hover: var(--color-button-hover--inner);
 }
 
 /* Map */

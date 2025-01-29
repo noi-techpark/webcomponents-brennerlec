@@ -36,16 +36,17 @@ export class InputComponent {
   render() {
     let hostClass = 'input input--prefix input--suffix';
     return <Host class={hostClass}>
-      <div class="input__prefix">
+      <div class="input__prefix" part="input-prefix">
         <noi-icon name="search"></noi-icon>
       </div>
       <input class="input__input"
+             part="input-native"
              ref={(input) => (this.nativeInput = input)}
              placeholder={this.placeholder}
              onInput={() => this.onValueChanged()}
       />
       <div class="input__suffix">
-        <noi-button class="input__clear-btn" disabled={ !this.hasValue} iconOnly={true} onBtnClick={() => this.clearValue()}>
+        <noi-button class="input__clear-btn" part="clear-btn" disabled={ !this.hasValue} iconOnly={true} onBtnClick={() => this.clearValue()}>
           <noi-icon name="close"></noi-icon>
         </noi-button>
       </div>
