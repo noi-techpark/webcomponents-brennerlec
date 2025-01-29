@@ -5,6 +5,7 @@
     "build": "stencil build --config stencil.config.ts --prod",
     "postbuild": "./scripts/copy-assets.js; ./scripts/update-manifest-files.js",
     "start": "stencil build --config stencil.config.ts --dev --watch --serve",
+    "docs": "stencil build --config stencil.config.ts --docs",
     "test": "stencil test --spec --config stencil.config.ts",
     "lint": "reuse lint"
   },

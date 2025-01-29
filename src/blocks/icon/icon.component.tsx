@@ -27,7 +27,7 @@ export class IconComponent {
    * icon name
    */
   @Prop()
-  name: string;
+  name: IconName | string;
 
   render() {
     switch (this.name) {

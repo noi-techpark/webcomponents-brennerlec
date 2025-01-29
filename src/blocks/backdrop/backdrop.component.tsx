@@ -4,6 +4,9 @@
 
 import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core";
 
+/**
+ * (INTERNAL) Backdrop component.
+ */
 @Component({
   tag: 'noi-backdrop',
   styleUrl: 'backdrop.css',
@@ -11,10 +14,20 @@ import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core";
 })
 export class BackdropComponent {
 
-  @Event() backdropClick: EventEmitter<void>;
 
+  /**
+   * Removing backdrop from DOM sometime can cause blink during layout recalculation.
+   * 'hidden' can be used to hide the backdrop without removing from DOM
+   *
+   * @default false
+   */
   @Prop()
   hidden = false;
+
+  /**
+   * Emitted when user clicks on the backdrop
+   */
+  @Event() backdropClick: EventEmitter<void>;
 
   render() {
     return <Host class={this.hidden ? 'hidden' : ''}>

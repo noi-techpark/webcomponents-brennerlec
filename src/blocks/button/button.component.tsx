@@ -4,6 +4,11 @@
 
 import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core";
 
+/**
+ * (INTERNAL) Backdrop component.
+ *
+ * @part button-native - Native button
+ */
 @Component({
   tag: 'noi-button',
   styleUrl: 'button.css',
@@ -11,12 +16,26 @@ import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core";
 })
 export class ButtonComponent {
 
+  /**
+   * button 'disabled' property
+   *
+   * @default false
+   */
   @Prop({mutable: true, reflect: true})
   disabled = false;
 
+  /**
+   * icon-only buttons has circle shape.
+   * The size of the button can be changed with "font-size" style
+   *
+   * @default false
+   */
   @Prop({mutable: true})
   iconOnly = false;
 
+  /**
+   * Emitted when user clicks on the button
+   */
   @Event() btnClick: EventEmitter<MouseEvent>;
 
 
