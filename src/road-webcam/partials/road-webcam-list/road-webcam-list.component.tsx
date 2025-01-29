@@ -3,10 +3,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 import { Component, Element, Event, EventEmitter, forceUpdate, h, Host, Prop, State, Watch } from "@stencil/core";
-import { prepareSearchString } from "../../utils/quickSearch";
-import { WebcamInfoShort } from "../../data/webcam/WebcamInfoShort";
-import { LanguageDataService } from "../../data/language/language-data-service";
-import { getLayoutClass, ViewLayout } from "../../data/breakpoints";
+import { prepareSearchString } from "../../../utils/quickSearch";
+import { WebcamInfoShort } from "../../../data/webcam/WebcamInfoShort";
+import { LanguageDataService } from "../../../data/language/language-data-service";
+import { getLayoutClass, ViewLayout } from "../../../data/breakpoints";
 
 @Component({
   tag: 'noi-road-webcam-list',

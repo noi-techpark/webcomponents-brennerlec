@@ -5,7 +5,7 @@
 import { h } from '@stencil/core';
 import { newSpecPage } from "@stencil/core/testing";
 import { RoadWebcamListComponent } from "./road-webcam-list.component";
-import { LanguageDataServiceMock } from "../../mocks/LanguageDataService.mock";
+import { LanguageDataServiceMock } from "../../../mocks/LanguageDataService.mock";
 
 describe('noi-road-webcam-list', () => {
   it('should render component', async () => {
