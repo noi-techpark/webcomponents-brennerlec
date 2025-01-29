@@ -37,7 +37,7 @@ export namespace Components {
     }
     interface NoiRoadWebcamList {
         "idSelected": string;
-        "layoutClass": string;
+        "layout": ViewLayout;
         "webcamArr": WebcamInfoShort[] | null;
     }
 }
@@ -195,7 +195,7 @@ declare namespace LocalJSX {
     }
     interface NoiRoadWebcamList {
         "idSelected"?: string;
-        "layoutClass"?: string;
+        "layout"?: ViewLayout;
         "onItemClick"?: (event: NoiRoadWebcamListCustomEvent<WebcamInfoShort>) => void;
         "webcamArr"?: WebcamInfoShort[] | null;
     }

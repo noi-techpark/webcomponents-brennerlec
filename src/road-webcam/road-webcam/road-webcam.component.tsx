@@ -6,7 +6,7 @@ import { Component, Element, forceUpdate, h, Host, Prop, State, Watch } from "@s
 import { WebcamDataService } from "../../data/webcam/webcam-data-service";
 import { DivIcon, LayerGroup, Map, Marker, Polyline } from 'leaflet';
 import { StencilComponent } from "../../utils/StencilComponent";
-import { getLayoutClass, ViewLayout } from "../../data/breakpoints";
+import { getLayoutClass, resolveLayoutAuto, ViewLayout } from "../../data/breakpoints";
 import { WebcamInfoShort } from "../../data/webcam/WebcamInfoShort";
 import { Subscription } from "../../utils/TimerWatcher";
 import { LanguageDataService } from "../../data/language/language-data-service";
@@ -25,7 +25,7 @@ export class RoadWebcamComponent implements StencilComponent {
   layout: ViewLayout = 'auto';
 
   @State()
-  layoutClass: string = 'layout';
+  layoutResolved: ViewLayout;
 
   sizeObserver: ResizeObserver = null;
 
@@ -184,7 +184,7 @@ export class RoadWebcamComponent implements StencilComponent {
 
   @Watch('layout')
   _recalculateLayoutClass() {
-    this.layoutClass = getLayoutClass(this.el.offsetWidth, this.layout);
+    this.layoutResolved = resolveLayoutAuto(this.el.offsetWidth, this.layout);
   }
 
   _watchSize() {
@@ -208,10 +208,10 @@ export class RoadWebcamComponent implements StencilComponent {
 
   render() {
     return (
-      <Host class={this.layoutClass}>
+      <Host class={getLayoutClass(this.layoutResolved)}>
         <noi-road-webcam-list class="layout__list"
                               part="list"
-                              layoutClass={this.layoutClass}
+                              layout={this.layoutResolved}
                               idSelected={this.selectedCameraInfo?.id}
                               webcamArr={this.webcamArr}
                               onItemClick={e => this.itemClick(e)}></noi-road-webcam-list>
