@@ -23,6 +23,16 @@
     "name": "traffic-prediction",
     "entryPoint": "dist/components/noi-traffic-prediction.js",
     "outputDir": "dist/bundle/noi-traffic-prediction",
-    "manifest": "bundle-config/traffic-prediction.wcs-manifest.json"
+    "manifest": "bundle-config/traffic-prediction.wcs-manifest.json",
+    "copy": [
+      {
+        "src": "assets/tp_i18n_en.json",
+        "dst": "."
+      },
+      {
+        "src": "assets/tp_i18n_it.json",
+        "dst": "."
+      }
+    ]
   }
 ]

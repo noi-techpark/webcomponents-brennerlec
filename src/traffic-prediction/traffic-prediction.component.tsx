@@ -13,6 +13,7 @@ import { addMonths } from "date-fns/addMonths";
 import { isSameMonth } from "date-fns/isSameMonth";
 import { addDays } from "date-fns/addDays";
 import { TrafficPredictionLocation } from "../data/traffic-prediction/TrafficPrediction";
+import { DIRECTION_NAME } from "./direction-name";
 
 @Component({
   tag: 'noi-traffic-prediction',
@@ -56,22 +57,31 @@ export class TrafficPredictionComponent implements StencilComponent {
   languageService: LanguageDataService;
 
   constructor() {
-    this._onLanguageChanged = this._onLanguageChanged.bind(this);
     this.__renderCalendarCell = this.__renderCalendarCell.bind(this);
-    this.init();
-  }
+    this._onLanguageChanged = this._onLanguageChanged.bind(this);
 
-  init() {
-    // initialize services in 'init', so it can be overridden in tests
     this.languageService = LanguageDataService.getInstance('tp');
     this.trafficPredictionService = new TrafficPredictionDataService();
   }
 
   connectedCallback() {
+    this.languageService = LanguageDataService.getInstance('tp');
     this.languageService.onLanguageChange.bind(this._onLanguageChanged);
+
     this.languageService.useLanguage(this.language);
+    this._recalculateLayoutClass();
     this._watchSize();
     this._fetchData();
+  }
+
+  disconnectedCallback() {
+    this._unwatchSize();
+    this.languageService.onLanguageChange.unbind(this._onLanguageChanged);
+  }
+
+  _onLanguageChanged() {
+    forceUpdate(this._calendar);
+    forceUpdate(this.el);
   }
 
   @Watch('location')
@@ -99,15 +109,6 @@ export class TrafficPredictionComponent implements StencilComponent {
     this.selectedPrediction = null;
   }
 
-  disconnectedCallback() {
-    this.languageService.onLanguageChange.unbind(this._onLanguageChanged);
-    this._unwatchSize();
-  }
-
-  _onLanguageChanged() {
-    forceUpdate(this.el);
-  }
-
   @Watch('language')
   onLanguageChange() {
     return this.languageService.useLanguage(this.language);
@@ -129,7 +130,7 @@ export class TrafficPredictionComponent implements StencilComponent {
 
   }
 
-  _changeSelectedDate(change: number) {
+  _changeSelectedDay(change: number) {
     if ( !this.selectedPredictionDate) {
       this.selectedPredictionDate = new Date();
     }
@@ -207,8 +208,12 @@ export class TrafficPredictionComponent implements StencilComponent {
       <div class="day">
         <div class="day__day">{d.date.getDate()}</div>
         <div class="day__busy">
-          <noi-traffic-level-box level={pData?.direction?.south?.summary}>S</noi-traffic-level-box>
-          <noi-traffic-level-box level={pData?.direction?.north?.summary}>N</noi-traffic-level-box>
+          <noi-traffic-level-box level={pData?.direction?.south?.summary}>
+            {this.languageService.translate('app.direction.south.letter')}
+          </noi-traffic-level-box>
+          <noi-traffic-level-box level={pData?.direction?.north?.summary}>
+            {this.languageService.translate('app.direction.north.letter')}
+          </noi-traffic-level-box>
         </div>
       </div>
     </noi-button>);
@@ -222,20 +227,20 @@ export class TrafficPredictionComponent implements StencilComponent {
         <span class="title__year">{this.viewDate.getFullYear()}</span>
       </div>
       <noi-button class="title__btn"
-                  title="Previous month"
+                  title={this.languageService.translate('app.title.month-prev')}
                   iconOnly={true}
                   onBtnClick={() => this.changeViewMonth(-1)}>
         <noi-icon name="chevron__left"></noi-icon>
       </noi-button>
       <noi-button class="title__btn"
-                  title="Next month"
+                  title={this.languageService.translate('app.title.month-next')}
                   iconOnly={true}
                   onBtnClick={() => this.changeViewMonth(1)}>
         <noi-icon name="chevron__right"></noi-icon>
       </noi-button>
       {this.isCurrentMonth ? null : (
         <noi-button class="title__btn"
-                    title="Show current month"
+                    title={this.languageService.translate('app.title.month-reset')}
                     iconOnly={true}
                     onBtnClick={() => this.resetToCurrentMonth()}>
           <noi-icon name="today"></noi-icon>
@@ -251,9 +256,9 @@ export class TrafficPredictionComponent implements StencilComponent {
     return (<div class="popup" part="popup">
       <div class="popup__title">
         <noi-button class="popup__title-btn"
-                    title="Previous month"
+                    title={this.languageService.translate('app.title.day-prev')}
                     iconOnly={true}
-                    onBtnClick={() => this._changeSelectedDate(-1)}>
+                    onBtnClick={() => this._changeSelectedDay(-1)}>
           <noi-icon name="chevron__left"></noi-icon>
         </noi-button>
         <div class="popup__title-text">
@@ -263,9 +268,9 @@ export class TrafficPredictionComponent implements StencilComponent {
           <span class="popup__title-year">{selectedDate.getFullYear()}</span>
         </div>
         <noi-button class="popup__title-btn"
-                    title="Next month"
+                    title={this.languageService.translate('app.popup.day-next')}
                     iconOnly={true}
-                    onBtnClick={() => this._changeSelectedDate(1)}>
+                    onBtnClick={() => this._changeSelectedDay(1)}>
           <noi-icon name="chevron__right"></noi-icon>
         </noi-button>
 
@@ -286,46 +291,48 @@ export class TrafficPredictionComponent implements StencilComponent {
 
         <div slot="loading" class="popup__content loading">
           {this.selectedPrediction === null ? (
-            <div class="loading-label">No data</div>
+            <div class="loading-label">{this.languageService.translate('app.no-data')}</div>
           ) : (
-            <div class="loading-label">Loading data...</div>
+            <div class="loading-label">{this.languageService.translate('app.loading')}</div>
           )}
         </div>
       </noi-loading>
       <div class="popup__footer">
         <noi-button class="popup__close-btn" onBtnClick={() => this.selectDay(null)}>
-          Chiudi
+          {this.languageService.translate('app.popup.close')}
         </noi-button>
       </div>
     </div>);
   }
 
   _renderFooter() {
+    const labelNorth = this.languageService.translate('app.details.direction-prefix') + ' ' + DIRECTION_NAME.north;
+    const labelSouth = this.languageService.translate('app.details.direction-prefix') + ' ' + DIRECTION_NAME.south;
     return (<div class="layout__footer" part="footer">
       <div class="legend">
-        <div class="legend__item" title="Verso Brennero">
-          <b class="legend__icon">N</b>
+        <div class="legend__item" title={labelNorth}>
+          <b class="legend__icon">{this.languageService.translate('app.direction.north.letter')}</b>
           <div class="legend__item-content">
-            Verso Brennero
+            {labelNorth}
           </div>
         </div>
-        <div class="legend__item" title="Verso Modena">
-          <b class="legend__icon">S</b>
+        <div class="legend__item" title={labelSouth}>
+          <b class="legend__icon">{this.languageService.translate('app.direction.south.letter')}</b>
           <div class="legend__item-content">
-            Verso Modena
+            {labelSouth}
           </div>
         </div>
         <noi-traffic-level-box class="legend__item" level="critical">
-          <div class="legend__item-content">Critico</div>
+          <div class="legend__item-content">{this.languageService.translate('app.traffic.critical')}</div>
         </noi-traffic-level-box>
         <noi-traffic-level-box class="legend__item" level="heavy">
-          <div class="legend__item-content">Intenso</div>
+          <div class="legend__item-content">{this.languageService.translate('app.traffic.heavy')}</div>
         </noi-traffic-level-box>
         <noi-traffic-level-box class="legend__item" level="severe">
-          <div class="legend__item-content">Sostenuto</div>
+          <div class="legend__item-content">{this.languageService.translate('app.traffic.severe')}</div>
         </noi-traffic-level-box>
         <noi-traffic-level-box class="legend__item" level="regular">
-          <div class="legend__item-content">Regolare</div>
+          <div class="legend__item-content">{this.languageService.translate('app.traffic.regular')}</div>
         </noi-traffic-level-box>
       </div>
     </div>);

@@ -2,12 +2,14 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import { Component, h, Host, Prop } from "@stencil/core";
+import { Component, Element, forceUpdate, h, Host, Prop } from "@stencil/core";
 import {
   TrafficPredictionDirection,
   TrafficPredictionTime,
   TrafficPredictionValue
 } from "../../../data/traffic-prediction/TrafficPredictionShort";
+import { LanguageDataService } from "../../../data/language/language-data-service";
+import { DIRECTION_NAME } from "../../direction-name";
 
 
 const timeParts: TrafficPredictionTime[] = ['q1', 'q2', 'q3', 'q4'];
@@ -16,10 +18,6 @@ const timePartNames = {
   'q2': '6/12',
   'q3': '12/18',
   'q4': '18/24',
-}
-const directionLabels = {
-  'north': 'NORD',
-  'south': 'SUD',
 }
 
 /**
@@ -38,14 +36,39 @@ export class DayDetailsComponent {
   @Prop({mutable: true})
   direction: TrafficPredictionDirection;
 
+  @Element() el: HTMLElement;
+
+  languageService: LanguageDataService;
+
+  constructor() {
+    this._onLanguageChanged = this._onLanguageChanged.bind(this);
+  }
+
+  connectedCallback() {
+    this.languageService = LanguageDataService.getInstance('tp');
+    this.languageService.onLanguageChange.bind(this._onLanguageChanged);
+  }
+
+  disconnectedCallback() {
+    this.languageService.onLanguageChange.unbind(this._onLanguageChanged);
+  }
+
+  _onLanguageChanged() {
+    forceUpdate(this.el);
+  }
+
   render() {
     return (<Host>
-      <div class="dd__name">Direzione <b>{directionLabels[this.direction]}</b></div>
-      <div class="dd__description">Verso Modena</div>
+      <div class="dd__name">
+        {this.languageService.translate('app.details.direction')}
+        <span class="dd__direction"> {this.languageService.translate('app.direction.' + this.direction)}</span>
+      </div>
+      <div
+        class="dd__description">{this.languageService.translate('app.details.direction-prefix')} {DIRECTION_NAME[this.direction]}</div>
       <div class="dd__parts">
         {timeParts.map((timePart) => {
           return (<div class="part__label">
-            <span>ore</span>
+            <span>{this.languageService.translate('app.details.part-hours')}</span>
             <span>{timePartNames[timePart]}</span>
           </div>);
         })}

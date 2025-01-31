@@ -17,6 +17,11 @@
   margin-bottom: 8px;
 }
 
+.dd__direction {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 .dd__description {
   color: var(--color-primary);
   text-align: center;

@@ -2,16 +2,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import { Component, h, Host, Prop } from "@stencil/core";
+import { Component, Element, forceUpdate, h, Host, Prop } from "@stencil/core";
 import { TrafficPredictionValue } from "../../../data/traffic-prediction/TrafficPredictionShort";
-
-const titles = {
-  "regular": "Regular",
-  "severe": "Severe",
-  "heavy": "Heavy",
-  "critical": "Critical",
-  "none": "No data",
-}
+import { LanguageDataService } from "../../../data/language/language-data-service";
 
 /**
  * (INTERNAL) part of 'noi-traffic-prediction'
@@ -26,9 +19,30 @@ export class LevelBoxComponent {
   @Prop({mutable: true})
   level: TrafficPredictionValue;
 
+  @Element() el: HTMLElement;
+
+  languageService: LanguageDataService;
+
+  constructor() {
+    this._onLanguageChanged = this._onLanguageChanged.bind(this);
+  }
+
+  connectedCallback() {
+    this.languageService = LanguageDataService.getInstance('tp');
+    this.languageService.onLanguageChange.bind(this._onLanguageChanged);
+  }
+
+  disconnectedCallback() {
+    this.languageService.onLanguageChange.unbind(this._onLanguageChanged);
+  }
+
+  _onLanguageChanged() {
+    forceUpdate(this.el);
+  }
+
   render() {
     const className = 'busy busy--' + (this.level || 'none');
-    return (<Host class={className} title={titles[this.level || 'none']}>
+    return (<Host class={className} title={this.languageService.translate('app.traffic.' + (this.level || 'none'))}>
       <slot/>
     </Host>);
   }
