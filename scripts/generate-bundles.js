@@ -13,20 +13,23 @@ const rollup = require('rollup');
 
 const LOGTAG = 'generate-bundles';
 
+const PROJECT_ROOT = path.normalize(path.join(__dirname, '../'));
+
 ///
 (async function () {
 
   console.log(`[${LOGTAG}] generate bundles`);
   console.log(`[${LOGTAG}] using "rollup" v${rollup.VERSION}`);
 
-  const bundlesConfigFile = __dirname + '/../bundle-config/bundles.json';
+  const bundlesConfigFile = path.join(PROJECT_ROOT, 'bundle-config/bundles.json');
+
+  // read config
   const fileContent = fs.readFileSync(bundlesConfigFile, 'utf8');
   const fileData = JSON.parse(fileContent);
-  // console.log(fileData);
 
   for (let i = 0; i < fileData.length; i++) {
     const bundleConfig = fileData[i];
-    await generateBundle(bundleConfig, bundleConfig.name || ('job-' + i));
+    await _generateBundle(bundleConfig, bundleConfig.name || ('job-' + i));
   }
   console.log(`[${LOGTAG}] done`);
 })().catch(e => {
@@ -39,24 +42,25 @@ const LOGTAG = 'generate-bundles';
  * @param config.entryPoint {string} bundle entry point
  * @param config.outputDir {string} bundle folder
  * @param config.manifest {string} wcs-manifest
+ * @param config.logo {string} logo file
  * @param [config.copy] {Array<{src:string, dst:string}>} copy assets
  * @param jobName {string} job name
  */
-async function generateBundle(config, jobName) {
-  console.log(`[${LOGTAG}] (${jobName}) start`);
+async function _generateBundle(config, jobName) {
 
-  const entryPoint = path.normalize(path.join(__dirname, '../', config.entryPoint));
+  const entryPoint = path.join(PROJECT_ROOT, config.entryPoint);
   const entryFilename = path.basename(config.entryPoint);
 
-  const targetDir = path.normalize(path.join(__dirname, '../', config.outputDir));
-  const targetFile = path.join(targetDir, entryFilename);
+  const targetDir = path.join(PROJECT_ROOT, config.outputDir);
+  const targetFile = path.join(PROJECT_ROOT, config.outputDir, entryFilename);
 
   // clear output folder
-  fs.rmSync(targetDir, {recursive: true});
-
-  // console.log(`[${LOGTAG}] bundle component "${entryPoint}" into "${targetFile}"`);
+  if (fs.existsSync(targetDir)) {
+    fs.rmSync(targetDir, {recursive: true});
+  }
 
   //// create a bundle
+  console.log(`[${LOGTAG}]   generate bundle "${entryFilename}"`);
   await rollup.rollup({
     input: entryPoint,
     treeshake: false, // already shaken by stencil
@@ -68,9 +72,9 @@ async function generateBundle(config, jobName) {
   if (config.copy?.length) {
     for (const copyConfig of config.copy) {
 
-      const srcFile = path.normalize(path.join(__dirname, '../', copyConfig.src));
+      const srcFile = path.join(PROJECT_ROOT, copyConfig.src);
       const srcFilename = path.basename(srcFile);
-      const dstFile = path.join(targetDir, copyConfig.dst, srcFilename);
+      const dstFile = path.join(PROJECT_ROOT, config.outputDir, copyConfig.dst, srcFilename);
 
       console.log(`[${LOGTAG}]   copy "${srcFilename}"`);
       fs.cpSync(srcFile, dstFile, {recursive: true});
@@ -82,10 +86,16 @@ async function generateBundle(config, jobName) {
   // may be not needed, as it has fixed names
 
   //// copy manifest
-  const manifestFile = path.normalize(path.join(__dirname, '../', config.manifest));
+  const manifestFile = path.join(PROJECT_ROOT, config.manifest);
   console.log(`[${LOGTAG}]   copy manifest "${manifestFile}"`);
-  const manifestDest = path.join(targetDir, 'wcs-manifest.json');
+  const manifestDest = path.join(PROJECT_ROOT, config.outputDir, 'wcs-manifest.json');
   fs.cpSync(manifestFile, manifestDest, {recursive: true});
+
+  //// copy logo
+  const logoFile = path.join(PROJECT_ROOT, config.logo);
+  console.log(`[${LOGTAG}]   copy logo "${logoFile}"`);
+  const logoDestDest = path.join(PROJECT_ROOT, config.outputDir, path.basename(logoFile));
+  fs.cpSync(logoFile, logoDestDest, {recursive: true});
 
   console.log(`[${LOGTAG}] (${jobName}) done `);
 }

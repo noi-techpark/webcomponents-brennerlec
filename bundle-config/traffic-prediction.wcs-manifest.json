@@ -1,6 +1,6 @@
 {
-  "title": "Hello-world",
-  "shortName": "hello-world-2",
+  "title": "Traffic prediction",
+  "shortName": "noi-traffic-prediction",
   "description": "Hello world simple webcomp example",
   "descriptionAbstract": "Hello world simple webcomp example",
   "license": "AGPL-3.0-or-later",
