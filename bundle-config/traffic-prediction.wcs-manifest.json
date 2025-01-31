@@ -30,20 +30,35 @@
   "image": "wcs-logo.png",
   "searchTags": [],
   "dist": {
-    "basePath": "dist/components",
+    "basePath": ".",
     "files": [
-      "--set by build script--"
+      "noi-traffic-prediction.js",
+      "tp_i18n_en.json",
+      "tp_i18n_it.json"
     ],
     "scripts": [
       {
-        "file": "noi-road-webcam.js",
+        "file": "noi-traffic-prediction.js",
         "parameter": "type='module'"
       }
     ]
   },
   "configuration": {
-    "tagName": "noi-road-webcam",
+    "tagName": "noi-traffic-prediction",
     "options": [
+      {
+        "key": "location",
+        "type": "select",
+        "label": "Traffic location",
+        "required": true,
+        "options": {
+          "values": [
+            "Brennero",
+            "Bolzano",
+            "Verona"
+          ]
+        }
+      },
       {
         "key": "layout",
         "type": "select",
@@ -79,7 +94,7 @@
         "label": "CSS style definition",
         "required": false,
         "options": {
-          "default": "--color-primary: #0068B4; --color-primary-rgb: 0, 104, 180; --color-secondary: #00A767; --color-marker: #3a9c77; --color-marker-bg: #FFFFFF; --color-text: #333333; --color-background: #FFFFFF"
+          "default": " --color-primary: #0068B4; --color-primary-rgb: 0, 104, 180; --color-secondary: #00A767; --color-secondary-rgb: 0, 167, 103; --color-text: #333333; --color-background: #FFFFFF; --color-background-shade: #F7F7F7; --color-border: #d0d0d0; --color-footer: #0068b4; --color-footer-contrast: #FFFFFF; --color-busy-regular: #18a767; --color-busy-regular-contrast: #FFFFFF; --color-busy-severe: #fab813; --color-busy-severe-contrast: #FFFFFF; --color-busy-heavy: #e62243; --color-busy-heavy-contrast: #FFFFFF; --color-busy-critical: #000000; --color-busy-critical-contrast: #FFFFFF; --busy-box-size: 3em;"
         }
       }
     ]
