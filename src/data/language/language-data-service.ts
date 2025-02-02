@@ -61,8 +61,9 @@ export class LanguageDataService {
       .catch(e => {
         console.warn(e);
         if (this.currentLanguage !== DEFAULT_LANGUAGE) {
-          this.currentLanguage = DEFAULT_LANGUAGE;
-          this.onLanguageChange.trigger(this.currentLanguage);
+          return this.useLanguage(DEFAULT_LANGUAGE);
+        } else {
+          return Promise.reject('Unable to load translation file for the language specified');
         }
       })
       .finally(() => {
