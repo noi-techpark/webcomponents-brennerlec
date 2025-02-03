@@ -189,6 +189,7 @@ export class TrafficPredictionComponent implements StencilComponent {
                                 ref={ref => this._calendar = ref}></noi-calendar-month>
 
           </div>
+          <div class="layout__spacer"></div>
           {this._renderFooter()}
         </div>
         <noi-backdrop hidden={ !this.selectedPredictionDate} onBackdropClick={() => this.selectDay(null)}>

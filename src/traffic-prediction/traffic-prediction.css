@@ -116,7 +116,8 @@
 }
 
 .layout__scroll {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     overflow: auto;
 }
 
@@ -128,6 +129,9 @@
 }
 
 .layout__center {
+}
+.layout__spacer {
+    flex:1;
 }
 
 .layout__footer {
