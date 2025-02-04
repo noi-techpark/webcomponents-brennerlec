@@ -60,12 +60,43 @@ services:
       POSTGRES_PASSWORD: wcs
       POSTGRES_DB: wcs
 
-  wcstore-cli:
-    container_name: wcstore-cli
+#  wcstore-cli:
+#    container_name: wcstore-cli
+#    image: ghcr.io/noi-techpark/it.bz.opendatahub.webcomponents/it.bz.opendatahub.webcomponents-local-wcs-cli:latest
+#    env_file: .env
+#    command: ./wait-for -t 0 api:${API_SERVER_PORT} -- python webcompstore-cli.py --push ${WC_VERSION}
+#    depends_on:
+#      - api
+#    volumes:
+#      - ./:/webcomponent
+
+  build:
+    image: node:20-alpine
+    volumes:
+      - ./:/code
+    working_dir: /code
+    command: sh -c "test -d node_modules || npm install; npm run build"
+    tty: true
+    profiles: [ "manual" ] # only runs with manual profile
+
+  wcstore-cli-traffic-prediction:
+    container_name: wcstore-cli-traffic-prediction
     image: ghcr.io/noi-techpark/it.bz.opendatahub.webcomponents/it.bz.opendatahub.webcomponents-local-wcs-cli:latest
     env_file: .env
     command: ./wait-for -t 0 api:${API_SERVER_PORT} -- python webcompstore-cli.py --push ${WC_VERSION}
     depends_on:
       - api
     volumes:
-      - ./:/webcomponent
+      - ./dist/bundle/noi-traffic-prediction:/webcomponent
+    profiles: [ "manual" ] # only runs with manual profile
+
+  wcstore-cli-road-webcam:
+    container_name: wcstore-cli-road-webcam
+    image: ghcr.io/noi-techpark/it.bz.opendatahub.webcomponents/it.bz.opendatahub.webcomponents-local-wcs-cli:latest
+    env_file: .env
+    command: ./wait-for -t 0 api:${API_SERVER_PORT} -- python webcompstore-cli.py --push ${WC_VERSION}
+    depends_on:
+      - api
+    volumes:
+      - ./dist/bundle/noi-road-webcam:/webcomponent
+    profiles: [ "manual" ] # only runs with manual profile
