@@ -9,36 +9,42 @@
   /**
    * @prop --color-primary: Primary color
    */
-  --color-primary--inner: var(--color-primary, #0068B4);
+  --color-primary: #0068B4;
   /**
    * @prop --color-primary-rgb: Primary color in RGB format
    */
-  --color-primary-rgb--inner: var(--color-primary-rgb, 0, 104, 180);
+  --color-primary-rgb: 0, 104, 180;
   /**
    * @prop --color-secondary: Secondary color
    */
-  --color-secondary--inner: var(--color-secondary, #00A767);
+  --color-secondary: #00A767;
 
   /**
    * @prop --color-marker: Map marker color
    */
-  --color-marker--inner: var(--color-marker, #3a9c77);
+  --color-marker: #3a9c77;
   /**
    * @prop --color-marker: Map marker background
    */
-  --color-marker-bg--inner: var(--color-marker-bg, #FFFFFF);
+  --color-marker-bg: #FFFFFF;
 
   /**
    * @prop --color-text: Text color
    */
-  --color-text--inner: var(--color-text, #333333);
+  --color-text: #333333;
   /**
    * @prop --color-background: Background color
    */
-  --color-background--inner: var(--color-background, #FFFFFF);
+  --color-background: #FFFFFF;
 
-  /* private */
-  --color-button-hover--inner: rgba(var(--color-primary-rgb--inner), 0.2);
+  /**
+   * @prop --scrollbar-color: Scrollbar thumb color
+   */
+  --scrollbar-color: initial;
+  /**
+   * @prop --scrollbar-bg: Scrollbar background color
+   */
+  --scrollbar-bg: initial;
 }
 
 :host {
@@ -49,7 +55,7 @@
   align-items: stretch;
   font-family: inherit;
 
-  background: var(--color-background--inner);
+  background: var(--color-background);
 }
 
 :host(.layout--tablet),
@@ -80,7 +86,7 @@ noi-brennerlec-map {
   height: 100%;
   box-sizing: border-box;
   padding: 20px;
-  background: var(--color-background--inner);
+  background: var(--color-background);
   display: flex;
   flex-direction: column;
 }
@@ -88,7 +94,7 @@ noi-brennerlec-map {
 
 .popup__title {
   font-weight: 500;
-  color: var(--color-primary--inner);
+  color: var(--color-primary);
 
   display: flex;
   align-items: center;
@@ -103,7 +109,7 @@ noi-brennerlec-map {
 .popup__subtitle {
   font-size: 12px;
   font-weight: 500;
-  color: var(--color-secondary--inner);
+  color: var(--color-secondary);
 }
 
 .popup__image {
@@ -115,12 +121,12 @@ noi-brennerlec-map {
 }
 
 .popup__close-btn {
-  --color-bg-hover: var(--color-button-hover--inner);
+  --color-bg-hover: rgba(var(--color-primary-rgb), 0.2);
 }
 
 /* Map */
 .noi-map-line {
-  stroke: var(--color-marker--inner);
+  stroke: var(--color-marker);
   stroke-width: 5px;
 }
 
@@ -132,13 +138,13 @@ noi-brennerlec-map {
   display: block;
   height: 100%;
   width: 100%;
-  border: 2px solid var(--color-marker--inner);
+  border: 2px solid var(--color-marker);
   border-radius: 50%;
-  background-color: var(--color-marker--inner);
+  background-color: var(--color-marker);
 }
 
 .noi-marker.selected .noi-marker__icon {
-  background-color: var(--color-marker-bg--inner);
+  background-color: var(--color-marker-bg);
 }
 
 .noi-marker__label {
@@ -146,14 +152,14 @@ noi-brennerlec-map {
   top: -3px;
 
   display: inline-block;
-  background-color: var(--color-marker-bg--inner);
-  border: 2px solid var(--color-marker--inner);
+  background-color: var(--color-marker-bg);
+  border: 2px solid var(--color-marker);
   text-align: center;
   vertical-align: middle;
   white-space: nowrap;
   margin-top: 4px;
   font-size: 11px;
-  color: var(--color-marker--inner);
+  color: var(--color-marker);
   font-weight: 700;
   padding: 0 10px 0 10px;
 }
@@ -169,6 +175,6 @@ noi-brennerlec-map {
 }
 
 .noi-marker.selected .noi-marker__label {
-  background-color: var(--color-marker--inner);
-  color: var(--color-marker-bg--inner);
+  background-color: var(--color-marker);
+  color: var(--color-marker-bg);
 }
