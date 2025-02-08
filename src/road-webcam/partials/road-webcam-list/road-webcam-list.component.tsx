@@ -43,10 +43,7 @@ export class RoadWebcamListComponent {
   constructor() {
     this._renderItem = this._renderItem.bind(this);
     this._onLanguageChanged = this._onLanguageChanged.bind(this);
-    this.init();
-  }
 
-  init() {
     this.languageService = LanguageDataService.getInstance();
   }
 
