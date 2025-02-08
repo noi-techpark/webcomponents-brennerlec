@@ -12,11 +12,11 @@ import { Subscription } from "../utils/TimerWatcher";
 import { LanguageDataService } from "../data/language/language-data-service";
 
 @Component({
-  tag: 'noi-road-webcam',
-  styleUrl: 'road-webcam.css',
+  tag: 'noi-brennerlec',
+  styleUrl: 'brennerlec.css',
   shadow: true,
 })
-export class RoadWebcamComponent implements StencilComponent {
+export class BrennerlecComponent implements StencilComponent {
 
   @Prop({mutable: true})
   language = 'en';

@@ -9,7 +9,7 @@ import { LanguageDataService } from "../../../data/language/language-data-servic
 import { getLayoutClass, ViewLayout } from "../../../data/breakpoints";
 
 /**
- * (INTERNAL) part of 'noi-road-webcam'
+ * (INTERNAL) part of 'noi-brennerlec'
  */
 @Component({
   tag: 'noi-road-webcam-list',

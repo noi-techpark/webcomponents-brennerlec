@@ -16,7 +16,7 @@ export const config: Config = {
   bundles: [
     {
       components: [
-        'noi-road-webcam'
+        'noi-brennerlec'
       ]
     },
   ],

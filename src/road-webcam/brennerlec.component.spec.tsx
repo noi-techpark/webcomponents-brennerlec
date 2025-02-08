@@ -6,17 +6,17 @@
 import "../mocks";
 
 import { h } from '@stencil/core';
-import { RoadWebcamComponent } from "./road-webcam.component";
+import { BrennerlecComponent } from "./brennerlec.component";
 import { newSpecPage } from "@stencil/core/testing";
 
-describe('noi-road-webcam', () => {
+describe('noi-brennerlec', () => {
   it('should render component', async () => {
 
-    RoadWebcamComponent.prototype._watchSize = () => null; // no ResizeObserver in mock
+    BrennerlecComponent.prototype._watchSize = () => null; // no ResizeObserver in mock
 
     const page = await newSpecPage({
-      components: [RoadWebcamComponent],
-      template: () => (<noi-road-webcam></noi-road-webcam>),
+      components: [BrennerlecComponent],
+      template: () => (<noi-brennerlec></noi-brennerlec>),
     });
 
     expect(page.root.shadowRoot).toEqualHtml(`

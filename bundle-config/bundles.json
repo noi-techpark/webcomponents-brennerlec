@@ -1,8 +1,8 @@
 [
   {
-    "name": "noi-road-webcam",
-    "entryPoint": "dist/components/noi-road-webcam.js",
-    "outputDir": "dist/bundle/noi-road-webcam",
+    "name": "noi-brennerlec",
+    "entryPoint": "dist/components/noi-brennerlec.js",
+    "outputDir": "dist/bundle/noi-brennerlec",
     "copy": [
       {
         "src": "assets/data_a22-1km.json",

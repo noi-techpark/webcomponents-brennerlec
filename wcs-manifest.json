@@ -1,6 +1,6 @@
 {
   "title": "Road webcam",
-  "shortName": "noi-road-webcam",
+  "shortName": "noi-brennerlec",
   "description": "Hello world simple webcomp example",
   "descriptionAbstract": "Hello world simple webcomp example",
   "license": "AGPL-3.0-or-later",
@@ -30,22 +30,22 @@
   "image": "wcs-logo.png",
   "searchTags": [],
   "dist": {
-    "basePath": "dist/bundle/noi-road-webcam",
+    "basePath": "dist/bundle/noi-brennerlec",
     "files": [
-      "noi-road-webcam.js",
+      "noi-brennerlec.js",
       "data_a22-1km.json",
       "i18n_en.json",
       "i18n_it.json"
     ],
     "scripts": [
       {
-        "file": "noi-road-webcam.js",
+        "file": "noi-brennerlec.js",
         "parameter": "type='module'"
       }
     ]
   },
   "configuration": {
-    "tagName": "noi-road-webcam",
+    "tagName": "noi-brennerlec",
     "options": [
       {
         "key": "layout",
