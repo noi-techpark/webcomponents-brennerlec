@@ -1,6 +1,6 @@
 {
-  "title": "Hello-world",
-  "shortName": "hello-world-2",
+  "title": "Road webcam",
+  "shortName": "noi-road-webcam",
   "description": "Hello world simple webcomp example",
   "descriptionAbstract": "Hello world simple webcomp example",
   "license": "AGPL-3.0-or-later",
@@ -30,9 +30,12 @@
   "image": "wcs-logo.png",
   "searchTags": [],
   "dist": {
-    "basePath": "dist/components",
+    "basePath": "dist/bundle/noi-road-webcam",
     "files": [
-      "--set by build script--"
+      "noi-road-webcam.js",
+      "data_a22-1km.json",
+      "i18n_en.json",
+      "i18n_it.json"
     ],
     "scripts": [
       {
