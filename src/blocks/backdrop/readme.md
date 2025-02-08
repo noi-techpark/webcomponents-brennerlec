@@ -41,14 +41,12 @@ SPDX-License-Identifier: CC0-1.0
 
 ### Used by
 
- - [noi-road-webcam](../../road-webcam)
- - [noi-traffic-prediction](../../traffic-prediction)
+ - [noi-brennerlec](../../road-webcam)
 
 ### Graph
 ```mermaid
 graph TD;
-  noi-road-webcam --> noi-backdrop
-  noi-traffic-prediction --> noi-backdrop
+  noi-brennerlec --> noi-backdrop
   style noi-backdrop fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

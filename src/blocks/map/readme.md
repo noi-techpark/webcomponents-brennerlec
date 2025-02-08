@@ -33,12 +33,12 @@ SPDX-License-Identifier: CC0-1.0
 
 ### Used by
 
- - [noi-road-webcam](../../road-webcam)
+ - [noi-brennerlec](../../road-webcam)
 
 ### Graph
 ```mermaid
 graph TD;
-  noi-road-webcam --> noi-brennerlec-map
+  noi-brennerlec --> noi-brennerlec-map
   style noi-brennerlec-map fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

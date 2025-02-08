@@ -30,18 +30,16 @@ Icon size can be changed by 'font-size' style
 
 ### Used by
 
+ - [noi-brennerlec](../../road-webcam)
  - [noi-input](../input)
- - [noi-road-webcam](../../road-webcam)
  - [noi-road-webcam-list](../../road-webcam/partials/road-webcam-list)
- - [noi-traffic-prediction](../../traffic-prediction)
 
 ### Graph
 ```mermaid
 graph TD;
+  noi-brennerlec --> noi-icon
   noi-input --> noi-icon
-  noi-road-webcam --> noi-icon
   noi-road-webcam-list --> noi-icon
-  noi-traffic-prediction --> noi-icon
   style noi-icon fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

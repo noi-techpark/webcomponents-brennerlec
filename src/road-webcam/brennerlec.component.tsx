@@ -11,6 +11,13 @@ import { WebcamInfoShort } from "../data/webcam/WebcamInfoShort";
 import { Subscription } from "../utils/TimerWatcher";
 import { LanguageDataService } from "../data/language/language-data-service";
 
+/**
+ * Road webcameras component
+ *
+ * @part list - camera list
+ * @part map - Map
+ * @part popup - Popup dialog
+ */
 @Component({
   tag: 'noi-brennerlec',
   styleUrl: 'brennerlec.css',
@@ -30,8 +37,11 @@ export class BrennerlecComponent implements StencilComponent {
   @Prop({mutable: true})
   layout: ViewLayout = 'auto';
 
+  /**
+   * Data reload interval
+   */
   @Prop({mutable: true})
-  reloadInterval: number;
+  reloadInterval: number = 60000;
 
   @State()
   layoutResolved: ViewLayout;
@@ -90,6 +100,9 @@ export class BrennerlecComponent implements StencilComponent {
     this.refreshData();
   }
 
+  /**
+   * Reload camera data (basically, it's images)
+   */
   @Method()
   async refreshData() {
     // re-subscribe to data source

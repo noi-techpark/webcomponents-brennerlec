@@ -13,12 +13,12 @@ import { getAssetPath } from "../../utils/asset-path";
  * Default interval to reload data
  * 1 minute
  */
-const RELOAD_INTERVAL_DEFAULT = 60 * 1000;
+export const RELOAD_INTERVAL_DEFAULT = 60 * 1000;
 /**
  * Minimum interval to reload data
  * 10 seconds
  */
-const RELOAD_INTERVAL_MIN = 10 * 1000;
+export const RELOAD_INTERVAL_MIN = 10 * 1000;
 
 // origin is used to track usage and traffic patterns
 const ORIGIN = 'webcomp-brennerlec';

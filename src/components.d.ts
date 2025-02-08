@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2025 NOI Techpark <digital@noi.bz.it>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 /* eslint-disable */
 /* tslint:disable */
 /**
@@ -24,6 +28,9 @@ export namespace Components {
          */
         "hidden": boolean;
     }
+    /**
+     * Road webcameras component
+     */
     interface NoiBrennerlec {
         /**
           * Language
@@ -33,7 +40,13 @@ export namespace Components {
           * Layout appearance
          */
         "layout": ViewLayout;
+        /**
+          * Reload camera data (basically, it's images)
+         */
         "refreshData": () => Promise<void>;
+        /**
+          * Data reload interval
+         */
         "reloadInterval": number;
     }
     /**
@@ -127,6 +140,9 @@ declare global {
         prototype: HTMLNoiBackdropElement;
         new (): HTMLNoiBackdropElement;
     };
+    /**
+     * Road webcameras component
+     */
     interface HTMLNoiBrennerlecElement extends Components.NoiBrennerlec, HTMLStencilElement {
     }
     var HTMLNoiBrennerlecElement: {
@@ -250,6 +266,9 @@ declare namespace LocalJSX {
          */
         "onBackdropClick"?: (event: NoiBackdropCustomEvent<void>) => void;
     }
+    /**
+     * Road webcameras component
+     */
     interface NoiBrennerlec {
         /**
           * Language
@@ -259,6 +278,9 @@ declare namespace LocalJSX {
           * Layout appearance
          */
         "layout"?: ViewLayout;
+        /**
+          * Data reload interval
+         */
         "reloadInterval"?: number;
     }
     /**
@@ -341,6 +363,9 @@ declare module "@stencil/core" {
              * (INTERNAL) Backdrop component.
              */
             "noi-backdrop": LocalJSX.NoiBackdrop & JSXBase.HTMLAttributes<HTMLNoiBackdropElement>;
+            /**
+             * Road webcameras component
+             */
             "noi-brennerlec": LocalJSX.NoiBrennerlec & JSXBase.HTMLAttributes<HTMLNoiBrennerlecElement>;
             /**
              * (INTERNAL) render leaflet map

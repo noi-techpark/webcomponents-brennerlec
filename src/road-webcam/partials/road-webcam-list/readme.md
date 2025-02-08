@@ -13,7 +13,7 @@ SPDX-License-Identifier: CC0-1.0
 
 ## Overview
 
-(INTERNAL) part of 'noi-road-webcam'
+(INTERNAL) part of 'noi-brennerlec'
 
 ## Properties
 
@@ -35,7 +35,7 @@ SPDX-License-Identifier: CC0-1.0
 
 ### Used by
 
- - [noi-road-webcam](../..)
+ - [noi-brennerlec](../..)
 
 ### Depends on
 
@@ -49,7 +49,7 @@ graph TD;
   noi-road-webcam-list --> noi-input
   noi-input --> noi-icon
   noi-input --> noi-button
-  noi-road-webcam --> noi-road-webcam-list
+  noi-brennerlec --> noi-road-webcam-list
   style noi-road-webcam-list fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

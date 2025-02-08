@@ -11,33 +11,54 @@ SPDX-License-Identifier: CC0-1.0
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Road webcameras component
+
 ## Properties
 
-| Property   | Attribute  | Description | Type                                          | Default  |
-| ---------- | ---------- | ----------- | --------------------------------------------- | -------- |
-| `language` | `language` |             | `string`                                      | `'en'`   |
-| `layout`   | `layout`   |             | `"auto" \| "desktop" \| "mobile" \| "tablet"` | `'auto'` |
+| Property         | Attribute         | Description          | Type                                          | Default  |
+| ---------------- | ----------------- | -------------------- | --------------------------------------------- | -------- |
+| `language`       | `language`        | Language             | `string`                                      | `'en'`   |
+| `layout`         | `layout`          | Layout appearance    | `"auto" \| "desktop" \| "mobile" \| "tablet"` | `'auto'` |
+| `reloadInterval` | `reload-interval` | Data reload interval | `number`                                      | `60000`  |
+
+
+## Methods
+
+### `refreshData() => Promise<void>`
+
+Reload camera data (basically, it's images)
+
+#### Returns
+
+Type: `Promise<void>`
+
+
 
 
 ## Shadow Parts
 
-| Part      | Description |
-| --------- | ----------- |
-| `"list"`  |             |
-| `"map"`   |             |
-| `"popup"` |             |
+| Part      | Description  |
+| --------- | ------------ |
+| `"list"`  | camera list  |
+| `"map"`   | Map          |
+| `"popup"` | Popup dialog |
 
 
 ## CSS Custom Properties
 
-| Name                  | Description                 |
-| --------------------- | --------------------------- |
-| `--color-background`  | Background color            |
-| `--color-marker`      | Map marker color            |
-| `--color-primary`     | Primary color               |
-| `--color-primary-rgb` | Primary color in RGB format |
-| `--color-secondary`   | Secondary color             |
-| `--color-text`        | Text color                  |
+| Name                    | Description                 |
+| ----------------------- | --------------------------- |
+| `--color-background`    | Background color            |
+| `--color-primary`       | Primary color               |
+| `--color-primary-rgb`   | Primary color in RGB format |
+| `--color-secondary`     | Secondary color             |
+| `--color-text`          | Text color                  |
+| `--map-marker-color`    | Map marker color            |
+| `--map-marker-color-bg` | Map marker background       |
+| `--scrollbar-bg`        | Scrollbar background color  |
+| `--scrollbar-color`     | Scrollbar thumb color       |
 
 
 ## Dependencies
@@ -53,16 +74,16 @@ SPDX-License-Identifier: CC0-1.0
 ### Graph
 ```mermaid
 graph TD;
-  noi-road-webcam --> noi-road-webcam-list
-  noi-road-webcam --> noi-brennerlec-map
-  noi-road-webcam --> noi-backdrop
-  noi-road-webcam --> noi-button
-  noi-road-webcam --> noi-icon
+  noi-brennerlec --> noi-road-webcam-list
+  noi-brennerlec --> noi-brennerlec-map
+  noi-brennerlec --> noi-backdrop
+  noi-brennerlec --> noi-button
+  noi-brennerlec --> noi-icon
   noi-road-webcam-list --> noi-icon
   noi-road-webcam-list --> noi-input
   noi-input --> noi-icon
   noi-input --> noi-button
-  style noi-road-webcam fill:#f9f,stroke:#333,stroke-width:4px
+  style noi-brennerlec fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------
