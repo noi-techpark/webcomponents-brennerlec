@@ -25,7 +25,13 @@ export namespace Components {
         "hidden": boolean;
     }
     interface NoiBrennerlec {
+        /**
+          * Language
+         */
         "language": string;
+        /**
+          * Layout appearance
+         */
         "layout": ViewLayout;
         "refreshData": () => Promise<void>;
         "reloadInterval": number;
@@ -245,7 +251,13 @@ declare namespace LocalJSX {
         "onBackdropClick"?: (event: NoiBackdropCustomEvent<void>) => void;
     }
     interface NoiBrennerlec {
+        /**
+          * Language
+         */
         "language"?: string;
+        /**
+          * Layout appearance
+         */
         "layout"?: ViewLayout;
         "reloadInterval"?: number;
     }

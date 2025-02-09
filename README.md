@@ -24,8 +24,8 @@ A responsive webcomponent for showing web camera images on Brennerlec A22 road.
       - [--color-background](#--color-background)
       - [--scrollbar-color](#--scrollbar-color)
       - [--scrollbar-bg](#--scrollbar-bg)
-      - [--color-marker](#--color-marker)
-      - [--color-marker-bg](#--color-marker-bg)
+      - [--map-marker-color](#--map-marker-color)
+      - [--map-color-marker-bg](#--map-color-marker-bg)
       - [--map-filter](#--map-filter)
   - [Getting started](#getting-started)
     - [Prerequisites](#prerequisites)
@@ -92,9 +92,10 @@ Default: 60000 (1 minute)
 ### CSS varialbles
 
 This is regular CSS styles for the component, but specific adjustment is supported.
+Here is an example of dark mode styles:
 
 ```css
-noi-brennerlec.dark-mode {
+noi-brennerlec {
   font-family: "Roboto", serif;
 
   --color-primary: rgb(224, 224, 224);
@@ -102,10 +103,9 @@ noi-brennerlec.dark-mode {
   --color-secondary: rgb(23, 162, 184);
   --color-text: #FFF;
   --color-background: #333;
-  --color-marker: #5d8d58;
-  --color-marker-bg: #282828;
+  --map-marker-color: #5d8d58;
+  --map-marker-color-bg: #282828;
   --map-filter: grayscale(100%) invert(1);
-
   --scrollbar-color: #CCC;
   --scrollbar-bg: #333;
 }
@@ -154,18 +154,18 @@ Scrollbar background color. Default is:
   --scrollbar-bg: initial;
 ```
 
-#### --color-marker
+#### --map-marker-color
 
 Marker color on the map. Default is:
 ```css
-  --color-marker: #3a9c77;
+  --map-marker-color: #3a9c77;
 ```
 
-#### --color-marker-bg
+#### --map-marker-color-bg
 
 Marker background color on the map. Default is:
 ```css
-  --color-marker-bg: #FFFFFF;
+  --map-marker-color-bg: #FFFFFF;
 ```
 
 #### --map-filter

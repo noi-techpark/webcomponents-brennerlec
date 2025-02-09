@@ -20,15 +20,6 @@
   --color-secondary: #00A767;
 
   /**
-   * @prop --color-marker: Map marker color
-   */
-  --color-marker: #3a9c77;
-  /**
-   * @prop --color-marker: Map marker background
-   */
-  --color-marker-bg: #FFFFFF;
-
-  /**
    * @prop --color-text: Text color
    */
   --color-text: #333333;
@@ -36,6 +27,15 @@
    * @prop --color-background: Background color
    */
   --color-background: #FFFFFF;
+
+  /**
+   * @prop --map-marker-color: Map marker color
+   */
+  --map-marker-color: #3a9c77;
+  /**
+   * @prop --map-marker-color-bg: Map marker background
+   */
+  --map-marker-color-bg: #FFFFFF;
 
   /**
    * @prop --scrollbar-color: Scrollbar thumb color
@@ -126,7 +126,7 @@ noi-brennerlec-map {
 
 /* Map */
 .noi-map-line {
-  stroke: var(--color-marker);
+  stroke: var(--map-marker-color);
   stroke-width: 5px;
 }
 
@@ -138,13 +138,13 @@ noi-brennerlec-map {
   display: block;
   height: 100%;
   width: 100%;
-  border: 2px solid var(--color-marker);
+  border: 2px solid var(--map-marker-color);
   border-radius: 50%;
-  background-color: var(--color-marker);
+  background-color: var(--map-marker-color);
 }
 
 .noi-marker.selected .noi-marker__icon {
-  background-color: var(--color-marker-bg);
+  background-color: var(--map-marker-color-bg);
 }
 
 .noi-marker__label {
@@ -152,14 +152,14 @@ noi-brennerlec-map {
   top: -3px;
 
   display: inline-block;
-  background-color: var(--color-marker-bg);
-  border: 2px solid var(--color-marker);
+  background-color: var(--map-marker-color-bg);
+  border: 2px solid var(--map-marker-color);
   text-align: center;
   vertical-align: middle;
   white-space: nowrap;
   margin-top: 4px;
   font-size: 11px;
-  color: var(--color-marker);
+  color: var(--map-marker-color);
   font-weight: 700;
   padding: 0 10px 0 10px;
 }
@@ -175,6 +175,6 @@ noi-brennerlec-map {
 }
 
 .noi-marker.selected .noi-marker__label {
-  background-color: var(--color-marker);
-  color: var(--color-marker-bg);
+  background-color: var(--map-marker-color);
+  color: var(--map-marker-color-bg);
 }
