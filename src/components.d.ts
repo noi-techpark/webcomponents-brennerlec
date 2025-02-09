@@ -27,6 +27,8 @@ export namespace Components {
     interface NoiBrennerlec {
         "language": string;
         "layout": ViewLayout;
+        "refreshData": () => Promise<void>;
+        "reloadInterval": number;
     }
     /**
      * (INTERNAL) render leaflet map
@@ -245,6 +247,7 @@ declare namespace LocalJSX {
     interface NoiBrennerlec {
         "language"?: string;
         "layout"?: ViewLayout;
+        "reloadInterval"?: number;
     }
     /**
      * (INTERNAL) render leaflet map

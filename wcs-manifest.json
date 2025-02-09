@@ -77,6 +77,13 @@
         }
       },
       {
+        "key": "reload-interval",
+        "type": "number",
+        "label": "Data refresh interval in milliseconds",
+        "required": false,
+        "default": "60000"
+      },
+      {
         "key": "style",
         "type": "text",
         "label": "CSS style definition",

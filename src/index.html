@@ -51,6 +51,19 @@ Output:
   <button onclick="webcam.language = null">lang: auto</button>
   <button onclick="webcam.classList.remove('dark')">styles: default</button>
   <button onclick="webcam.classList.add('dark')">styles: dark mode</button>
+  <button onclick="webcam.reloadInterval = 30000">reload 30s</button>
+  <button onclick="webcam.reloadInterval = null">reload default</button>
+
+<!-- font size is not supported
+  <script>
+    function changeFontSize(change) {
+      const currentSize = parseInt(webcam.style.fontSize || '16px', 10);
+      webcam.style.fontSize = (currentSize + change) + 'px';
+    }
+  </script>
+  <button onclick="changeFontSize(-1)">font -</button>
+  <button onclick="changeFontSize(1)">font +</button>
+  -->
 </div>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">

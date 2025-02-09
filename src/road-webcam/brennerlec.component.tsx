@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import { Component, Element, forceUpdate, h, Host, Prop, State, Watch } from "@stencil/core";
+import { Component, Element, forceUpdate, h, Host, Method, Prop, State, Watch } from "@stencil/core";
 import { WebcamDataService } from "../data/webcam/webcam-data-service";
 import { DivIcon, LayerGroup, Map, Marker, Polyline } from 'leaflet';
 import { StencilComponent } from "../utils/StencilComponent";
@@ -23,6 +23,9 @@ export class BrennerlecComponent implements StencilComponent {
 
   @Prop({mutable: true})
   layout: ViewLayout = 'auto';
+
+  @Prop({mutable: true})
+  reloadInterval: number;
 
   @State()
   layoutResolved: ViewLayout;
@@ -73,12 +76,23 @@ export class BrennerlecComponent implements StencilComponent {
   }
 
   _onLanguageChanged() {
+    this.refreshData();
+  }
+
+  @Watch('reloadInterval')
+  reloadIntervalChanged() {
+    this.refreshData();
+  }
+
+  @Method()
+  async refreshData() {
     // re-subscribe to data source
     if (this.webcamListSub) {
       this.webcamListSub.unsubscribe();
     }
     if (this.map) {
-      this.webcamListSub = this.webcamDataService.cameraListWatcher(this.languageService.currentLanguage).subscribe(this._cameraDataReceived.bind(this));
+      this.webcamListSub = this.webcamDataService.cameraListWatcher(this.languageService.currentLanguage, this.reloadInterval)
+        .subscribe(this._cameraDataReceived.bind(this));
     }
     forceUpdate(this.el);
   }
@@ -109,7 +123,8 @@ export class BrennerlecComponent implements StencilComponent {
 
 
     //
-    this.webcamListSub = this.webcamDataService.cameraListWatcher(this.languageService.currentLanguage).subscribe(this._cameraDataReceived.bind(this));
+    this.webcamListSub = this.webcamDataService.cameraListWatcher(this.languageService.currentLanguage, this.reloadInterval)
+      .subscribe(this._cameraDataReceived.bind(this));
   }
 
   _cameraDataReceived(webcamArr: WebcamInfoShort[]) {
