@@ -18,9 +18,15 @@ import { LanguageDataService } from "../data/language/language-data-service";
 })
 export class BrennerlecComponent implements StencilComponent {
 
+  /**
+   * Language
+   */
   @Prop({mutable: true})
   language = 'en';
 
+  /**
+   * Layout appearance
+   */
   @Prop({mutable: true})
   layout: ViewLayout = 'auto';
 
