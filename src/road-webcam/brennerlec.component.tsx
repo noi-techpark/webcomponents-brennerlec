@@ -2,30 +2,49 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import { Component, Element, forceUpdate, h, Host, Prop, State, Watch } from "@stencil/core";
-import { WebcamDataService } from "../../data/webcam/webcam-data-service";
+import { Component, Element, forceUpdate, h, Host, Method, Prop, State, Watch } from "@stencil/core";
+import { WebcamDataService } from "../data/webcam/webcam-data-service";
 import { DivIcon, LayerGroup, Map, Marker, Polyline } from 'leaflet';
-import { StencilComponent } from "../../utils/StencilComponent";
-import { getLayoutClass, ViewLayout } from "../../data/breakpoints";
-import { WebcamInfoShort } from "../../data/webcam/WebcamInfoShort";
-import { Subscription } from "../../utils/TimerWatcher";
-import { LanguageDataService } from "../../data/language/language-data-service";
+import { StencilComponent } from "../utils/StencilComponent";
+import { getLayoutClass, resolveLayoutAuto, ViewLayout } from "../data/breakpoints";
+import { WebcamInfoShort } from "../data/webcam/WebcamInfoShort";
+import { Subscription } from "../utils/TimerWatcher";
+import { LanguageDataService } from "../data/language/language-data-service";
 
+/**
+ * Road webcameras component
+ *
+ * @part list - camera list
+ * @part map - Map
+ * @part popup - Popup dialog
+ */
 @Component({
-  tag: 'noi-road-webcam',
-  styleUrl: 'road-webcam.css',
+  tag: 'noi-brennerlec',
+  styleUrl: 'brennerlec.css',
   shadow: true,
 })
-export class RoadWebcamComponent implements StencilComponent {
+export class BrennerlecComponent implements StencilComponent {
 
+  /**
+   * Language
+   */
   @Prop({mutable: true})
   language = 'en';
 
+  /**
+   * Layout appearance
+   */
   @Prop({mutable: true})
   layout: ViewLayout = 'auto';
 
+  /**
+   * Data reload interval
+   */
+  @Prop({mutable: true})
+  reloadInterval: number = 60000;
+
   @State()
-  layoutClass: string = 'layout';
+  layoutResolved: ViewLayout;
 
   sizeObserver: ResizeObserver = null;
 
@@ -54,10 +73,7 @@ export class RoadWebcamComponent implements StencilComponent {
     this.itemClick = this.itemClick.bind(this);
     this._onLanguageChanged = this._onLanguageChanged.bind(this);
     this.mapReady = this.mapReady.bind(this);
-    this.init();
-  }
 
-  init() {
     this.languageService = LanguageDataService.getInstance();
     this.webcamDataService = new WebcamDataService();
   }
@@ -65,6 +81,7 @@ export class RoadWebcamComponent implements StencilComponent {
   connectedCallback() {
     this.languageService.onLanguageChange.bind(this._onLanguageChanged);
     this.languageService.useLanguage(this.language);
+    this._recalculateLayoutClass();
     this._watchSize();
   }
 
@@ -75,12 +92,26 @@ export class RoadWebcamComponent implements StencilComponent {
   }
 
   _onLanguageChanged() {
+    this.refreshData();
+  }
+
+  @Watch('reloadInterval')
+  reloadIntervalChanged() {
+    this.refreshData();
+  }
+
+  /**
+   * Reload camera data (basically, it's images)
+   */
+  @Method()
+  async refreshData() {
     // re-subscribe to data source
     if (this.webcamListSub) {
       this.webcamListSub.unsubscribe();
     }
     if (this.map) {
-      this.webcamListSub = this.webcamDataService.cameraListWatcher(this.languageService.currentLanguage).subscribe(this._cameraDataReceived.bind(this));
+      this.webcamListSub = this.webcamDataService.cameraListWatcher(this.languageService.currentLanguage, this.reloadInterval)
+        .subscribe(this._cameraDataReceived.bind(this));
     }
     forceUpdate(this.el);
   }
@@ -111,7 +142,8 @@ export class RoadWebcamComponent implements StencilComponent {
 
 
     //
-    this.webcamListSub = this.webcamDataService.cameraListWatcher(this.languageService.currentLanguage).subscribe(this._cameraDataReceived.bind(this));
+    this.webcamListSub = this.webcamDataService.cameraListWatcher(this.languageService.currentLanguage, this.reloadInterval)
+      .subscribe(this._cameraDataReceived.bind(this));
   }
 
   _cameraDataReceived(webcamArr: WebcamInfoShort[]) {
@@ -184,7 +216,7 @@ export class RoadWebcamComponent implements StencilComponent {
 
   @Watch('layout')
   _recalculateLayoutClass() {
-    this.layoutClass = getLayoutClass(this.el.offsetWidth, this.layout);
+    this.layoutResolved = resolveLayoutAuto(this.el.offsetWidth, this.layout);
   }
 
   _watchSize() {
@@ -208,36 +240,37 @@ export class RoadWebcamComponent implements StencilComponent {
 
   render() {
     return (
-      <Host class={this.layoutClass}>
+      <Host class={getLayoutClass(this.layoutResolved)}>
         <noi-road-webcam-list class="layout__list"
                               part="list"
-                              layoutClass={this.layoutClass}
+                              layout={this.layoutResolved}
                               idSelected={this.selectedCameraInfo?.id}
                               webcamArr={this.webcamArr}
                               onItemClick={e => this.itemClick(e)}></noi-road-webcam-list>
         <div class="layout__center">
           <noi-brennerlec-map part="map" onMapReady={e => this.mapReady(e)}></noi-brennerlec-map>
           <noi-backdrop hidden={ !this.selectedCameraInfo} onBackdropClick={() => this.onBackdropClick()}>
-            {this.selectedCameraInfo ?
-              <div class="popup" part="popup">
-                <div class="popup__title">
-                  <span class="popup__title-text">{this.selectedCameraInfo.title}</span>
-                  <noi-button class="popup__close-btn" iconOnly={true} onBtnClick={() => this._selectCamera(null)}>
-                    <noi-icon name="close"></noi-icon>
-                  </noi-button>
-                </div>
-                <div class="popup__subtitle">{this.selectedCameraInfo.description}</div>
-                {/*<div class="popup__image" style={{backgroundImage: 'url("' + this.selectedCameraInfo.Webcamurl + '")'}}></div>*/}
-                <img class="popup__image"
-                     src={this.selectedCameraInfo.image.imageUrl}
-                     alt={this.selectedCameraInfo.image.imageName}/>
-                <div class="popup__subtitle">{this.selectedCameraInfo.lastChangeLocalized}</div>
-              </div>
-              : ''}
+            {this.selectedCameraInfo ? this._renderPopup() : null}
           </noi-backdrop>
         </div>
       </Host>
     );
   }
 
+  _renderPopup() {
+    return (<div class="popup" part="popup">
+      <div class="popup__title">
+        <span class="popup__title-text">{this.selectedCameraInfo.title}</span>
+        <noi-button class="popup__close-btn" iconOnly={true} onBtnClick={() => this._selectCamera(null)}>
+          <noi-icon name="close"></noi-icon>
+        </noi-button>
+      </div>
+      <div class="popup__subtitle">{this.selectedCameraInfo.description}</div>
+      {/*<div class="popup__image" style={{backgroundImage: 'url("' + this.selectedCameraInfo.Webcamurl + '")'}}></div>*/}
+      <img class="popup__image"
+           src={this.selectedCameraInfo.image.imageUrl}
+           alt={this.selectedCameraInfo.image.imageName}/>
+      <div class="popup__subtitle">{this.selectedCameraInfo.lastChangeLocalized}</div>
+    </div>);
+  }
 }

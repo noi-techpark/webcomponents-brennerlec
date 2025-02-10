@@ -10,7 +10,7 @@ export const Breakpoints = {
 
 export type ViewLayout = 'desktop' | 'tablet' | 'mobile' | 'auto';
 
-export function getLayoutClass(offsetWidth: number, layout: ViewLayout) {
+export function getLayoutClass(layout: ViewLayout) {
   switch (layout) {
     case "desktop":
       return 'layout layout--desktop';
@@ -18,18 +18,25 @@ export function getLayoutClass(offsetWidth: number, layout: ViewLayout) {
       return 'layout layout--tablet';
     case "mobile":
       return 'layout layout--mobile';
+    default:
+      console.warn(`Unknown layout layout: ${layout}`);
+      return 'layout';
+  }
+}
+
+/**
+ * resolve 'auto' layout to specific size
+ */
+export function resolveLayoutAuto(offsetWidth: number, layout: ViewLayout): ViewLayout {
+  if (layout && layout !== 'auto') {
+    return layout;
   }
 
-  // dynamic
-  let layoutClass = 'layout';
   if (offsetWidth > Breakpoints.Tablet) {
-    layoutClass += ' layout--desktop';
-    return layoutClass;
+    return 'desktop';
   }
   if (offsetWidth > Breakpoints.Mobile) {
-    layoutClass += ' layout--tablet';
-    return layoutClass;
+    return 'tablet';
   }
-  layoutClass += ' layout--mobile';
-  return layoutClass;
+  return 'mobile';
 }

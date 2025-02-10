@@ -16,7 +16,7 @@ SPDX-License-Identifier: CC0-1.0
 </head>
 
 <body>
-<h1>Web Component - Boilerplate & Helloworld</h1>
+<h1>Road webcam</h1>
 
 Code Snippet for web build:
 <pre style="overflow: hidden">
@@ -31,7 +31,7 @@ Code Snippet for web build:
 Output:
 
 <!--  <hello-world name="Hello World!"></hello-world>-->
-<noi-road-webcam id="webcam" style="height: 600px; width: 100%"></noi-road-webcam>
+<noi-brennerlec id="webcam" style="height: 600px; width: 100%"></noi-brennerlec>
 
 <script nomodule src="./noi-brennerlec.js"></script>
 <script type="module" src="./noi-brennerlec.esm.js"></script>
@@ -49,8 +49,21 @@ Output:
   <button onclick="webcam.language = 'it'">lang: it</button>
   <button onclick="webcam.language = 'xx'">lang: xx (missing)</button>
   <button onclick="webcam.language = null">lang: auto</button>
-  <button onclick="webcam.classList.remove('dark')">styles: default</button>
-  <button onclick="webcam.classList.add('dark')">styles: dark mode</button>
+  <button onclick="webcam.classList.remove('dark-mode')">styles: default</button>
+  <button onclick="webcam.classList.add('dark-mode')">styles: dark mode</button>
+  <button onclick="webcam.reloadInterval = 30000">reload 30s</button>
+  <button onclick="webcam.reloadInterval = null">reload default</button>
+
+<!-- font size is not supported
+  <script>
+    function changeFontSize(change) {
+      const currentSize = parseInt(webcam.style.fontSize || '16px', 10);
+      webcam.style.fontSize = (currentSize + change) + 'px';
+    }
+  </script>
+  <button onclick="changeFontSize(-1)">font -</button>
+  <button onclick="changeFontSize(1)">font +</button>
+  -->
 </div>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,13 +71,13 @@ Output:
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet">
 <style>
-  noi-road-webcam {
+  noi-brennerlec {
     font-family: "Roboto", serif;
     outline: 1px solid red;
     margin: 5px;
   }
 
-  noi-road-webcam.dark {
+  noi-brennerlec.dark-mode {
     font-family: "Roboto", serif;
     outline: 1px solid red;
     margin: 5px;
@@ -74,9 +87,11 @@ Output:
     --color-secondary: rgb(23, 162, 184);
     --color-text: #FFF;
     --color-background: #333;
-    --color-marker: #5d8d58;
-    --color-marker-bg: #282828;
+    --map-marker-color: #5d8d58;
+    --map-marker-color-bg: #282828;
     --map-filter: grayscale(100%) invert(1);
+    --scrollbar-color: #CCC;
+    --scrollbar-bg: #333;
   }
 </style>
 

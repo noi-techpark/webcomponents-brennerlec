@@ -28,7 +28,15 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.1);
+
+  /**
+   * @prop --backdrop-color: backdrop color
+   */
+  background: var(--backdrop-color, rgba(0, 0, 0, 0.1));
+  /**
+   * @prop --backdrop-filter: backdrop filter
+   */
+  backdrop-filter: var(--backdrop-filter, none);
 }
 
 .content {

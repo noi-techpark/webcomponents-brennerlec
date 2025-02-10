@@ -8,6 +8,9 @@ import { StencilComponent } from "../../utils/StencilComponent";
 
 const TILE_LAYER = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
+/**
+ * (INTERNAL) render leaflet map
+ */
 @Component({
   tag: 'noi-brennerlec-map',
   // styleUrl: 'noi-map.css',
@@ -23,6 +26,10 @@ export class NoiMapComponent implements StencilComponent {
   sizeObserver: ResizeObserver = null;
 
   @Element() el: HTMLElement;
+
+  /**
+   * Emitted when map is initialized and ready to draw on it
+   */
   @Event() mapReady: EventEmitter<Map>;
 
   connectedCallback() {

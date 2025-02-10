@@ -9,7 +9,16 @@ import { TimerWatcher } from "../../utils/TimerWatcher";
 import { translateProperty } from "../language/translateProperty";
 import { getAssetPath } from "../../utils/asset-path";
 
-const RELOAD_INTERVAL = 1 * 60 * 1000;
+/**
+ * Default interval to reload data
+ * 1 minute
+ */
+export const RELOAD_INTERVAL_DEFAULT = 60 * 1000;
+/**
+ * Minimum interval to reload data
+ * 10 seconds
+ */
+export const RELOAD_INTERVAL_MIN = 10 * 1000;
 
 // origin is used to track usage and traffic patterns
 const ORIGIN = 'webcomp-brennerlec';
@@ -33,7 +42,12 @@ export class WebcamDataService {
       });
   }
 
-  cameraListWatcher(lang: string, interval = RELOAD_INTERVAL) {
+  cameraListWatcher(lang: string, interval = RELOAD_INTERVAL_DEFAULT) {
+    interval = interval || RELOAD_INTERVAL_DEFAULT; // null value doesn't set default value, so we assign it manually
+    if (interval < RELOAD_INTERVAL_MIN) {
+      console.warn(`Reload interval cannot be less than ${RELOAD_INTERVAL_MIN}ms`);
+      interval = RELOAD_INTERVAL_MIN;
+    }
     return new TimerWatcher(() => {
       return this.getCameraList(lang);
     }, interval);
@@ -66,7 +80,7 @@ function _convertToShortInfo(info: WebcamInfo, roadName: string, requestDate: Da
   const distanceStr = info.Mapping?.[roadName]?.km || '';
   const distance = parseInt(distanceStr, 10) || 0;
 
-  // add dynamic value to image url to skip caching issue
+  // add dynamic value to image url to ignore cached value
   const u = new URL(image.ImageUrl);
   u.searchParams.append('origin', ORIGIN);
   u.searchParams.append('_', requestDate.getTime() + '');

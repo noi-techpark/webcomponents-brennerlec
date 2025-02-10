@@ -1,8 +1,8 @@
 {
-  "title": "Hello-world",
-  "shortName": "hello-world-2",
-  "description": "Hello world simple webcomp example",
-  "descriptionAbstract": "Hello world simple webcomp example",
+  "title": "Road webcam",
+  "shortName": "noi-brennerlec",
+  "description": "A responsive webcomponent for showing web camera images on Brennerlec A22 road",
+  "descriptionAbstract": "A responsive webcomponent for showing web camera images on Brennerlec A22 road",
   "license": "AGPL-3.0-or-later",
   "repositoryUrl": "https://github.com/noi-techpark/webcomponents-brennerlec.git",
   "copyrightHolders": [
@@ -30,19 +30,22 @@
   "image": "wcs-logo.png",
   "searchTags": [],
   "dist": {
-    "basePath": "dist/components",
+    "basePath": "dist/bundle/noi-brennerlec",
     "files": [
-      "--set by build script--"
+      "noi-brennerlec.js",
+      "data_a22-1km.json",
+      "i18n_en.json",
+      "i18n_it.json"
     ],
     "scripts": [
       {
-        "file": "noi-road-webcam.js",
+        "file": "noi-brennerlec.js",
         "parameter": "type='module'"
       }
     ]
   },
   "configuration": {
-    "tagName": "noi-road-webcam",
+    "tagName": "noi-brennerlec",
     "options": [
       {
         "key": "layout",
@@ -74,12 +77,21 @@
         }
       },
       {
+        "key": "reload-interval",
+        "type": "text",
+        "label": "Data refresh interval in milliseconds",
+        "required": false,
+        "options": {
+          "default": "60000"
+        }
+      },
+      {
         "key": "style",
         "type": "text",
         "label": "CSS style definition",
         "required": false,
         "options": {
-          "default": "--color-primary: #0068B4; --color-primary-rgb: 0, 104, 180; --color-secondary: #00A767; --color-marker: #3a9c77; --color-marker-bg: #FFFFFF; --color-text: #333333; --color-background: #FFFFFF"
+          "default": "--color-primary: #0068B4; --color-secondary: #00A767; --color-text: #333333; --color-background: #FFFFFF; --map-marker-color: #3a9c77; --map-marker-color-bg: #FFFFFF;"
         }
       }
     ]

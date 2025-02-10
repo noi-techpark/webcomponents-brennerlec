@@ -3,10 +3,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 import { Component, Element, Event, EventEmitter, forceUpdate, h, Host, Prop, State, Watch } from "@stencil/core";
-import { prepareSearchString } from "../../utils/quickSearch";
-import { WebcamInfoShort } from "../../data/webcam/WebcamInfoShort";
-import { LanguageDataService } from "../../data/language/language-data-service";
+import { prepareSearchString } from "../../../utils/quickSearch";
+import { WebcamInfoShort } from "../../../data/webcam/WebcamInfoShort";
+import { LanguageDataService } from "../../../data/language/language-data-service";
+import { getLayoutClass, ViewLayout } from "../../../data/breakpoints";
 
+/**
+ * (INTERNAL) part of 'noi-brennerlec'
+ */
 @Component({
   tag: 'noi-road-webcam-list',
   styleUrl: 'road-webcam-list.css',
@@ -21,7 +25,7 @@ export class RoadWebcamListComponent {
   idSelected: string = null;
 
   @Prop({mutable: true})
-  layoutClass: string = '';
+  layout: ViewLayout;
 
   @State()
   searchString: string = null;
@@ -39,10 +43,7 @@ export class RoadWebcamListComponent {
   constructor() {
     this._renderItem = this._renderItem.bind(this);
     this._onLanguageChanged = this._onLanguageChanged.bind(this);
-    this.init();
-  }
 
-  init() {
     this.languageService = LanguageDataService.getInstance();
   }
 
@@ -81,18 +82,20 @@ export class RoadWebcamListComponent {
   }
 
   render() {
-    return <Host class={this.layoutClass}>
+    return <Host class={getLayoutClass(this.layout)}>
       <div class="title-wrapper">
         <div class="title ellipsis">
           <noi-icon class="title__icon" name="stations"></noi-icon>
           <span class="title__text">{this.languageService.translate('app.list.title')}</span>
         </div>
-        <noi-input placeholder={this.languageService.translate('app.list.search.placeholder')}
+        <noi-input class="title__search"
+                   placeholder={this.languageService.translate('app.list.search.placeholder')}
                    onValueChange={v => this.filterData(v.detail)}></noi-input>
       </div>
       <div class="list">
         {this.webcamArrFiltered.map(this._renderItem)}
-        {this.webcamArrFiltered.length ? '' : <div class="no-data">{this.languageService.translate('app.list.empty')}</div>}
+        {this.webcamArrFiltered.length ? '' :
+          <div class="no-data">{this.languageService.translate('app.list.empty')}</div>}
       </div>
     </Host>
   }
@@ -102,14 +105,14 @@ export class RoadWebcamListComponent {
     if (this.idSelected === camera.id) {
       itemClass += ' item--selected';
     }
-    return <button type="button"
-                   class={itemClass}
-                   onClick={() => this.itemClick.emit(camera)}>
+    return (<button type="button"
+                    class={itemClass}
+                    onClick={() => this.itemClick.emit(camera)}>
       <div class="item__wrapper">
         <div class="item__title">{camera.title}</div>
         <div class="item__description ellipsis">{camera.lastChangeLocalized}</div>
       </div>
       <div class="item__image" style={{backgroundImage: 'url("' + camera.image.imageUrl + '")'}}></div>
-    </button>
+    </button>);
   }
 }
